@@ -3,17 +3,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Mapa extends CI_Controller{
 
+    public $pagina, $nombreSitio, $variables;
+
     function __construct(){
         parent::__construct();
+        //inicializacion de Atributos Globales
+        $this->nombreSitio = 'Masticapp';
+        $this->pagina = 'Mapa';
+
+        $this->variables['nombreSitio'] = $this->nombreSitio;
+        $this->variables['titulo'] = ucfirst($this->pagina); // Capitalize the first letter
+
+        //FinAtributos
+
 
     }
 
-    function index ($page = 'mapa'){
+    function index (){
 
-        $data['title'] = ucfirst($page); // Capitalize the first letter
 
-        $this->load->view('tema/header', $data);
 
+        $this->load->view('tema/header', $this->variables);
+        //carga capa mapa
         $this->load->library('googlemaps');
         $config['center'] = '37.4419, -122.1419';
         $config['zoom'] = 'auto';
@@ -28,7 +39,7 @@ class Mapa extends CI_Controller{
         $this->load->view('mapa/mapa', $data);
 
 
-        $this->load->view('tema/footer', $data);
+        $this->load->view('tema/footer', $this->variables);
 
     }
 }
