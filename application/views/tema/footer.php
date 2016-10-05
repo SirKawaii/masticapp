@@ -18,7 +18,7 @@
         <div class="col l3 s12">
           <h5 class="white-text">Connect</h5>
           <ul>
-            <li><a class="white-text" href="https://github.com/SirKawaii/kohisekai">Github</a></li>
+            <li><a class="white-text" href="https://github.com/SirKawaii/">Github</a></li>
             <li><a class="white-text" href="https://twitter.com">Twitter</a></li>
           </ul>
         </div>
