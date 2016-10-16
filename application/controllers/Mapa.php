@@ -7,9 +7,15 @@ class Mapa extends CI_Controller{
 
     function __construct(){
         parent::__construct();
+        //helpers
+        $this->load->helper('url');
+        //bibliotecas
+        $this->load->library('navegacion', array('mapa','lista'));
+
         //inicializacion de Atributos Globales
         $this->nombreSitio = 'Masticapp';
         $this->pagina = 'Mapa';
+        $this->variables['navegacion'] = $this->navegacion->construir_Navegacion();
 
         $this->variables['nombreSitio'] = $this->nombreSitio;
         $this->variables['titulo'] = ucfirst($this->pagina); // Capitalize the first letter
@@ -23,16 +29,25 @@ class Mapa extends CI_Controller{
 
 
 
+
         $this->load->view('tema/header', $this->variables);
         //carga capa mapa
         $this->load->library('googlemaps');
-        $config['center'] = '37.4419, -122.1419';
-        $config['zoom'] = 'auto';
+        $config = array();
+        $config['center'] = 'auto';
+        //importante
         $config['apiKey'] = 'AIzaSyBmBDBqhuIcPwFmj6pWDCO4ylTCmWQab-M';
+        $this->googlemaps->initialize($config);
+        $config['onboundschanged'] = 'if (!centreGot) {
+        var mapCentre = map.getCenter();
+            marker_0.setOptions({
+                position: new       google.maps.LatLng(mapCentre.lat(), mapCentre.lng())
+            });
+        }
+        centreGot = true;';
         $this->googlemaps->initialize($config);
 
         $marker = array();
-        $marker['position'] = '37.429, -122.1419';
         $this->googlemaps->add_marker($marker);
         $data['map'] = $this->googlemaps->create_map();
 
