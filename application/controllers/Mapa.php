@@ -11,6 +11,8 @@ class Mapa extends CI_Controller{
         $this->load->helper('url');
         //bibliotecas
         $this->load->library('navegacion', array('mapa','lista'));
+        //modelos
+        $this->load->model('dir_locales_model');
 
         //inicializacion de Atributos Globales
         $this->nombreSitio = 'Masticapp';
@@ -28,9 +30,12 @@ class Mapa extends CI_Controller{
     function index (){
 
 
-
+        //Llamada a base de detos
+        $data['basedatos'] = $this->dir_locales_model->obtener_locales();
+        //creando Pagina
 
         $this->load->view('tema/header', $this->variables);
+
         //carga capa mapa
         $this->load->library('googlemaps');
         $config = array();
@@ -45,13 +50,24 @@ class Mapa extends CI_Controller{
             });
         }
         centreGot = true;';
+
         $this->googlemaps->initialize($config);
 
         $marker = array();
         $this->googlemaps->add_marker($marker);
+
+        foreach($data['basedatos']->result() as $list_locales_map ){
+            $marker = array();
+            $marker['position'] = $list_locales_map->ml_calle.' '.$list_locales_map->ml_direccion.' '.$list_locales_map->ml_numero.','.$list_locales_map->ml_ciudad;
+            $marker['infowindow_content'] = $list_locales_map->ml_nombre_local;
+            $marker['icon'] = 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=A|9999FF|000000';
+            $this->googlemaps->add_marker($marker);
+        }
         $data['map'] = $this->googlemaps->create_map();
 
+        //fin mapa;
         $this->load->view('mapa/mapa', $data);
+
 
 
         $this->load->view('tema/footer', $this->variables);

@@ -14,7 +14,7 @@
 
  <nav class="light-blue lighten-1" role="navigation">
     <div class="nav-wrapper container">
-        <a id="logo-container" href="#" class="brand-logo"><?php echo $titulo; ?></a>
+        <a id="logo-container" href="#" class="brand-logo"><?= $titulo; ?></a>
       <ul class="right hide-on-med-and-down">
         <?= $navegacion;?>
         <li><a href="#" class="waves-effect" onclick="$('.button-collapse').sideNav('show');"><i class="material-icons">menu</i></a></li>
