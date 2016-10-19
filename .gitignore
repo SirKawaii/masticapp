@@ -4,3 +4,5 @@
 /bower_components/
 /node_modules/
 /license.txt
+/application/config/development/
+/application/config/production/
