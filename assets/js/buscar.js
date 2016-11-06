@@ -1,23 +1,21 @@
-function buscar(){
-    alert('funcuisfsdsa');
-    var parametros = {
-                "valorCaja1" : 'nada'
-        };
-        $.ajax({
-                data:  parametros,
-                url:   'http://localhost/www/kohisekai/masticapp/busqueda/buscar',
-                type:  'post',
-                beforeSend: function () {
-                        //$("#resultado").html("Procesando, espere por favor...");
-                        alert('algo paso');
-                },
-                success:  function (response) {
-                        //$("#resultado").html(response);
-                        alert('funcione');
-                },
-                fail: function (){
-                    alert('Fallo!');
-                }
-        });
+function buscar2() {
+    alert("soy un mensaje");
+                event.preventDefault();
+                var user_name = $("input#name").val();
+                var password = $("input#pwd").val();
+                jQuery.ajax({
+                    type: "POST",
+                    url: "<?php echo base_url(); ?>" + "busqueda/user_data_submit",
+                    dataType: 'json',
+                    data: {name: user_name, pwd: password},
+                    success: function(res) {
+                        if (res){
+                            // Show Entered Value
+                            jQuery("div#result").show();
+                            jQuery("div#value").html(res.username);
+                            jQuery("div#value_pwd").html(res.pwd);
+                        }
+                    }
+                });
 
 }
