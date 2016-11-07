@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Busqueda extends CI_Controller{
+class Local extends CI_Controller{
 
     public $pagina, $nombreSitio, $variables;
 
@@ -11,13 +11,12 @@ class Busqueda extends CI_Controller{
         $this->load->helper('url');
         //bibliotecas
         $this->load->library('navegacion', array('mapa','busqueda'));
-
         //modelos
         $this->load->model('dir_locales_model');
 
         //inicializacion de Atributos Globales
         $this->nombreSitio = 'Masticapp';
-        $this->pagina = 'Busqueda';
+        $this->pagina = 'Local';
         $this->variables['navegacion'] = $this->navegacion->construir_Navegacion();
 
         $this->variables['nombreSitio'] = $this->nombreSitio;
@@ -28,22 +27,19 @@ class Busqueda extends CI_Controller{
 
     }
 
-    public function index (){
-        $this->load->view('tema/header',$this->variables);
-        $this->load->view('mapa/busqueda');
-        $this->load->view('tema/footer',$this->variables);
-    }
+    function index (){
 
-    function buscar(){
-        $this->load->view('mapa/buscar');
 
-    }
+        //Llamada a base de detos
+        $data['basedatos'] = $this->dir_locales_model->obtener_locales();
+        //creando Pagina
 
-    public function user_data_submit() {
-        $buscar = $this->input->post("buscar");
-        $post = $this->dir_locales_model->buscar_a($buscar);
-        //echo json_encode($post);
-        echo json_encode($post);
+        $this->load->view('tema/header', $this->variables);
+
+        $this->load->view('local/local');
+
+        $this->load->view('tema/footer', $this->variables);
+
     }
 }
 

@@ -1,24 +1,31 @@
-<script>/*
-    $(document).ready(function(){
-        $(".boton").on("click", function(){
-            alert(document.getElementById('local').value);
-            var j_busqueda = "un texto simple";
-            $.get("<?= base_url('busqueda/user_data_submit')?>/"+j_busqueda,"",function(data){
-                console.log(data);
-                $('#resultado_busqueda').html(data);
-            });
-        });
-    });
-    */
+<script>
     $(document).ready(function(valor){
+        $(".input_box").on("input", function(){
+            buscar();
+        });
+
         $(".boton").on("click", function(){
+           buscar();
+        });
+
+        $(".input_box").keypress(function(e) {
+            if(e.which == 13) {
+            // Acciones a realizar, por ej: enviar formulario.
+            buscar();
+            return false;
+            }
+        });
+
+    });
+
+    function buscar(){
             valor = document.getElementById('local').value;
             $.ajax({
                 url:"<?= base_url('busqueda/user_data_submit')?>" ,
                 type:"POST",
                 data:{buscar:valor},
                 success:function(respuesta){
-                    alert(respuesta);
+                    console.log(respuesta);
                     var registros = eval(respuesta);
                     html="";
                     html= "<table class='centered striped highlight'><thead><tr>";
@@ -35,8 +42,7 @@
                     $('#resultado_busqueda').html(html);
                 }
             });
-        });
-    });
+        }
 </script>
 
 <body>
