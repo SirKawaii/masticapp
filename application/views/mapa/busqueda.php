@@ -46,6 +46,7 @@
 </script>
 
 <body>
+<div id="container" class="col l4">
     <?
 echo form_open();
 // Parametros
@@ -63,4 +64,5 @@ echo form_close();
     <div id="resultado_busqueda">
 
     </div>
+</div>
 </body>
