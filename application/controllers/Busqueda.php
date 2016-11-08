@@ -42,7 +42,6 @@ class Busqueda extends CI_Controller{
     public function user_data_submit() {
         $buscar = $this->input->post("buscar");
         $post = $this->dir_locales_model->buscar_a($buscar);
-        //echo json_encode($post);
         echo json_encode($post);
     }
 }

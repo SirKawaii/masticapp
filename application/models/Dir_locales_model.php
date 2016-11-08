@@ -30,6 +30,11 @@ class Dir_locales_model extends CI_Model {
             return $this->db->get('m_dir_locales')->result();
         }
 
+        public function obtener_local($valor){
+            return $this->db->get_where('m_dir_locales', array('ml_id' => $valor))->result();
+
+        }
+
 
 }
 ?>

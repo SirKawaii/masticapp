@@ -9,8 +9,5 @@
     <div class="container">
     <?php echo $map['html']; ?>
     </div>
-    <ul>
-        <div><? foreach($basedatos->result() as $list_locales){echo "<li>".$list_locales->ml_nombre_local."</li>";};?></div>
-    </ul>
 </body>
 </html>

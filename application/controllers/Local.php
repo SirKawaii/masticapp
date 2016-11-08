@@ -22,21 +22,22 @@ class Local extends CI_Controller{
         $this->variables['nombreSitio'] = $this->nombreSitio;
         $this->variables['titulo'] = ucfirst($this->pagina); // Capitalize the first letter
 
+
         //FinAtributos
 
 
     }
 
-    function index (){
+    function index ($id_local){
 
+        //obterner local especifico
+        $post = $this->dir_locales_model->obtener_local($id_local);
+        $local['local'] = json_encode($post);
 
-        //Llamada a base de detos
-        $data['basedatos'] = $this->dir_locales_model->obtener_locales();
-        //creando Pagina
-
+        //cargar vistas
         $this->load->view('tema/header', $this->variables);
 
-        $this->load->view('local/local');
+        $this->load->view('local/local',$local);
 
         $this->load->view('tema/footer', $this->variables);
 

@@ -51,7 +51,9 @@ class Mapa extends CI_Controller{
         }
         centreGot = true;';
 
+        $config['geocodeCaching'] = TRUE;
         $this->googlemaps->initialize($config);
+
 
         $marker = array();
         $this->googlemaps->add_marker($marker);
@@ -59,7 +61,7 @@ class Mapa extends CI_Controller{
         foreach($data['basedatos']->result() as $list_locales_map ){
             $marker = array();
             $marker['position'] = $list_locales_map->ml_calle.' '.$list_locales_map->ml_direccion.' '.$list_locales_map->ml_numero.','.$list_locales_map->ml_ciudad;
-            $marker['infowindow_content'] = $list_locales_map->ml_nombre_local;
+            $marker['infowindow_content'] = "<a href='".base_url()."/local/index/".$list_locales_map->ml_id."'>".$list_locales_map->ml_nombre_local."</a>";
             $marker['icon'] = 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=A|9999FF|000000';
             $this->googlemaps->add_marker($marker);
         }
@@ -67,8 +69,6 @@ class Mapa extends CI_Controller{
 
         //fin mapa;
         $this->load->view('mapa/mapa', $data);
-
-
 
         $this->load->view('tema/footer', $this->variables);
 
