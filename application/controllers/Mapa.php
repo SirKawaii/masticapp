@@ -10,7 +10,7 @@ class Mapa extends CI_Controller{
         //helpers
         $this->load->helper('url');
         //bibliotecas
-        $this->load->library('navegacion', array('mapa','busqueda','local'));
+        $this->load->library('navegacion', array('mapa','busqueda'));
         //modelos
         $this->load->model('dir_locales_model');
 

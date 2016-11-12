@@ -10,7 +10,7 @@ class Local extends CI_Controller{
         //helpers
         $this->load->helper('url');
         //bibliotecas
-        $this->load->library('navegacion', array('mapa','busqueda','local'));
+        $this->load->library('navegacion', array('mapa','busqueda'));
         //modelos
         $this->load->model('dir_locales_model');
 
@@ -29,10 +29,21 @@ class Local extends CI_Controller{
     }
 
     function index ($id_local){
+        //$this->load->library('puntuacion');
+        //$local['puntuacion'] = $this->puntuacion->construir_puntuacion();
+
+
 
         //obterner local especifico
         $post = $this->dir_locales_model->obtener_local($id_local);
         $local['local'] = json_encode($post);
+        //obtener puntaje del local
+        $post = $this->dir_locales_model->verificar_puntaje($id_local);
+        $local['puntaje'] = $post;
+
+        //cargar libreria de rater
+        $this->load->library('incluye_estrellas');
+        $this->variables['estrellas'] = $this->incluye_estrellas->put_estrellas();
 
         //cargar vistas
         $this->load->view('tema/header', $this->variables);
@@ -42,6 +53,13 @@ class Local extends CI_Controller{
         $this->load->view('tema/footer', $this->variables);
 
     }
+
+        public function user_data_submit() {
+        $buscar = $this->input->post("valor");
+        $post = $this->dir_locales_model->buscar_a($buscar);
+        echo json_encode($post);
+    }
+
 }
 
 

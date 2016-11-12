@@ -35,6 +35,48 @@ class Dir_locales_model extends CI_Model {
 
         }
 
+        public function verificar_puntaje($id_local){
+            //verificar puntaje calidad
+            $query_calidad = $this->db->get_where('puntaje_calidad', array('ml_id' => $id_local));
+            if($query_calidad->num_rows() > 0 ){
+                $calidad  = $query_calidad;
+            }
+            else{
+                $data = array(
+                        'ml_id' => $id_local,
+                        'prom_calidad' => '0',
+                        'cant_votos' => '0'
+                        );
+
+                $this->db->insert('puntaje_calidad', $data);
+                $calidad = $this->db->get_where('puntaje_calidad', array('ml_id' => $id_local));
+            }
+
+            //verificar puntaje precio
+            $query_precio = $this->db->get_where('puntaje_precio', array('ml_id' => $id_local));
+            if($query_precio->num_rows() > 0){
+                $precio = $query_precio;
+            }
+            else{
+                $data = array(
+                    'ml_id' => $id_local,
+                    'prom_precio' => '0',
+                    'cant_votos' => '0'
+                    );
+
+                $this->db->insert('puntaje_precio', $data);
+                $precio = $this->db->get_where('puntaje_precio', array('ml_id' => $id_local));
+            }
+
+            //retornar datos;
+            $respuesta['precio'] = $precio->result();
+            $respuesta['calidad'] = $calidad->result();
+
+            return $respuesta;
+
+
+        }
+
 
 }
 ?>
