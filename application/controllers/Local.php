@@ -45,6 +45,12 @@ class Local extends CI_Controller{
         $this->load->library('incluye_estrellas');
         $this->variables['estrellas'] = $this->incluye_estrellas->put_estrellas();
 
+        //Cargar Comentarios
+        $comentarios = $this->dir_locales_model->obtener_comentarios($id_local);
+        $this->load->library('comentarios',$comentarios);
+        $local['comentarios'] =  $this->comentarios->cargar_comentarios();
+
+
         //cargar vistas
         $this->load->view('tema/header', $this->variables);
 
@@ -54,11 +60,28 @@ class Local extends CI_Controller{
 
     }
 
-        public function user_data_submit() {
-        $buscar = $this->input->post("valor");
-        $post = $this->dir_locales_model->buscar_a($buscar);
-        echo json_encode($post);
-    }
+        public function actualiza_precio() {
+            $id = $this->input->post("id");
+            $voto = $this->input->post("voto");
+            $post = $this->dir_locales_model->actualiza_precio($id,$voto);
+            echo json_encode($post);
+        }
+
+         public function actualiza_calidad() {
+            $id = $this->input->post("id");
+            $voto = $this->input->post("voto");
+            $post = $this->dir_locales_model->actualiza_calidad($id,$voto);
+            echo json_encode($post);
+        }
+
+        public function agrega_comentario(){
+            $local = $this->input->post('id');
+            $nombre = $this->input->post('nombre');
+            $comentario = $this->input->post('comentario');
+
+            $post = $this->dir_locales_model->agrega_comentario($local,$nombre,$comentario);
+            echo json_encode($post);
+        }
 
 }
 

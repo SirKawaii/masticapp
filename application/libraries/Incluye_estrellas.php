@@ -66,7 +66,7 @@ var options_calidad = {
     selected_symbol_type: 'utf8_fork', // Must be a key from symbols
     cursor: 'default',
     readonly: false,
-    change_once: false, // Determines if the rating can only be set once
+    change_once: true, // Determines if the rating can only be set once
 }
 
 var options_precio = {
@@ -88,7 +88,7 @@ var options_precio = {
     selected_symbol_type: 'utf8_dinero', // Must be a key from symbols
     cursor: 'default',
     readonly: false,
-    change_once: false, // Determines if the rating can only be set once
+    change_once: true, // Determines if the rating can only be set once
 }
 
 $(".rating_calidad").rate(options_calidad);

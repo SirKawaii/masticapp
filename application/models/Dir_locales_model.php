@@ -77,6 +77,75 @@ class Dir_locales_model extends CI_Model {
 
         }
 
+        public function actualiza_precio($id_local,$voto){
+            $this->db->select('prom_precio');
+            $this->db->where('ml_id', $id_local);
+            $query = $this->db->get('puntaje_precio')->result_array();
+            $result_q = array_shift($query);
+            $promedio = $result_q['prom_precio'];
+
+
+            $this->db->select('cant_votos');
+            $this->db->where('ml_id', $id_local);
+            $query = $this->db->get('puntaje_precio')->result_array();
+            $result_q = array_shift($query);
+            $votos = $result_q['cant_votos'] + 1;
+
+            $data = array(
+                'prom_precio' => ($promedio + $voto)/2,
+                'cant_votos' => $votos
+            );
+
+        $this->db->where('ml_id', $id_local);
+        $this->db->update('puntaje_precio', $data);
+
+        return true;
+        }
+
+        public function actualiza_calidad($id_local,$voto){
+            $this->db->select('prom_calidad');
+            $this->db->where('ml_id', $id_local);
+            $query = $this->db->get('puntaje_calidad')->result_array();
+            $result_q = array_shift($query);
+            $promedio = $result_q['prom_calidad'];
+
+
+            $this->db->select('cant_votos');
+            $this->db->where('ml_id', $id_local);
+            $query = $this->db->get('puntaje_calidad')->result_array();
+            $result_q = array_shift($query);
+            $votos = $result_q['cant_votos'] + 1;
+
+            $data = array(
+                'prom_calidad' => ($promedio + $voto)/2,
+                'cant_votos' => $votos
+            );
+
+        $this->db->where('ml_id', $id_local);
+        $this->db->update('puntaje_calidad', $data);
+
+        return true;
+        }
+
+        public function obtener_comentarios($id_local){
+            $this->db->where('ml_id',$id_local);
+            $respuesta = $this->db->get('comentarios')->result_array();
+
+            return $respuesta;
+        }
+
+        public function agrega_comentario($id_local,$nombre_usuario,$comentario){
+            $data = array(
+                'ml_id' => $id_local,
+                'nombre_usuario' => $nombre_usuario,
+                'comentario'=> $comentario,
+                'fecha' => date("Y-m-d H:i:s")
+            );
+
+            $respuesta = $this->db->insert('comentarios', $data);
+
+            return true;
+        }
 
 }
 ?>
