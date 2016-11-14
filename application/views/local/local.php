@@ -20,7 +20,7 @@ else{$numero = $local_dat->ml_numero;}
     <div class="col l4 s12 m10 offset-m1 offset-l2">
     <div class="card medium hoverable">
         <div class="card-image waves-effect waves-block waves-light">
-          <img class="activator" src="<? if ($detalle->imagen != ""){echo $detalle->imagen;}else{echo "http://casas.brick7.co.ve/media/ve/62501_62600/62549_29768c9021b84b25.jpg";} ?>">
+          <img class="activator" src="<? if ($detalle->imagen != ""){echo base_url('assets/imagenes/$detalle->imagen');}else{echo base_url('assets/imagenes/generico.jpg');} ?>">
         </div>
         <div class="card-content">
           <span class="card-title activator grey-text text-darken-4"><?= $local_dat->ml_nombre_local;?><i class="material-icons right">more_vert</i></span>
