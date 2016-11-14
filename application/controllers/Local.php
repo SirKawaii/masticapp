@@ -37,6 +37,8 @@ class Local extends CI_Controller{
         //obterner local especifico
         $post = $this->dir_locales_model->obtener_local($id_local);
         $local['local'] = json_encode($post);
+        //obtener detalles del local
+        $local['detalles'] = json_encode($this->dir_locales_model->obtener_detalles($id_local));
         //obtener puntaje del local
         $post = $this->dir_locales_model->verificar_puntaje($id_local);
         $local['puntaje'] = $post;
@@ -80,6 +82,18 @@ class Local extends CI_Controller{
             $comentario = $this->input->post('comentario');
 
             $post = $this->dir_locales_model->agrega_comentario($local,$nombre,$comentario);
+            echo json_encode($post);
+        }
+
+        public function modificar_local(){
+            $id = $this->input->post('id');
+            $imagen = $this->input->post('imagen');
+            $descripcion = $this->input->post('descripcion');
+            $tipo_local = $this->input->post('tipo_local');
+            $tipo_comida = $this->input->post('tipo_comida');
+            $tel = $this->input->post('telefono');
+
+            $post = $this->dir_locales_model->modificar_detalles($id,$imagen,$descripcion,$tipo_local,$tipo_comida,$tel);
             echo json_encode($post);
         }
 

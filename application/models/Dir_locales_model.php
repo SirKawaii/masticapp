@@ -147,5 +147,38 @@ class Dir_locales_model extends CI_Model {
             return true;
         }
 
+        public function obtener_detalles($id_local){
+            $this->db->where('ml_id',$id_local);
+            $query = $this->db->get('m_detalles_locales');
+
+            if($query->num_rows() > 0 ){
+                $resultado = $query->result_array();
+            }
+            else{
+                $data = array(
+                    'ml_id' => $id_local,
+                );
+
+                $this->db->insert('m_detalles_locales', $data);
+                $this->db->where('ml_id',$id_local);
+                $resultado = $this->db->get('m_detalles_locales')->result_array();
+            }
+            return $resultado;
+        }
+
+        public function modificar_detalles($id_local,$imagen,$descrip,$tipo,$comida,$tel){
+            $data = array(
+                'imagen' => $imagen,
+                'descripcion' => $descrip,
+                'tipo_local' => $tipo,
+                'tipo_comida' => $comida,
+                'telefono' => $tel
+            );
+            $this->db->where('ml_id', $id_local);
+            $query = $this->db->update('m_detalles_locales', $data);
+
+            return $query;
+        }
+
 }
 ?>

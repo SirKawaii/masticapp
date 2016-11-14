@@ -4,11 +4,15 @@ $local_data = json_decode($local);
 $local_dat = $local_data[0];
 $precio = $puntaje['precio'][0];
 $calidad = $puntaje['calidad'][0];
+$det = json_decode($detalles);
+$detalle = $det[0];
 
 
 //variables de local
 $promedio = round((($precio->prom_precio + $calidad->prom_calidad)/2),1);
 
+if (isset($local_dat->ml_numero)){$numero = 'S/N';}
+else{$numero = $local_dat->ml_numero;}
 
 ?>
 <div id="container">
@@ -16,15 +20,27 @@ $promedio = round((($precio->prom_precio + $calidad->prom_calidad)/2),1);
     <div class="col l4 s12 m10 offset-m1 offset-l2">
     <div class="card medium hoverable">
         <div class="card-image waves-effect waves-block waves-light">
-          <img class="activator" src="http://casas.brick7.co.ve/media/ve/62501_62600/62549_29768c9021b84b25.jpg">
+          <img class="activator" src="<? if ($detalle->imagen != ""){echo $detalle->imagen;}else{echo "http://casas.brick7.co.ve/media/ve/62501_62600/62549_29768c9021b84b25.jpg";} ?>">
         </div>
         <div class="card-content">
           <span class="card-title activator grey-text text-darken-4"><?= $local_dat->ml_nombre_local;?><i class="material-icons right">more_vert</i></span>
-            <p><a href="#">This is a link</a></p>
+            <p><a href="<?= base_url('direcciones/index/'.$local_dat->ml_id)?>">¡Llevame ahí!</a></p>
         </div>
         <div class="card-reveal">
-          <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-          <p>Here is some more information about this product that is only revealed once clicked on.</p>
+          <span class="card-title grey-text text-darken-4"><?= $local_dat->ml_nombre_local?><i class="material-icons right">close</i></span>
+          <p>Direccion: <?= $local_dat->ml_calle ?> #<?= $numero?> <?= $local_dat->ml_direccion?> <?=$local_dat->ml_detalle?> </p>
+          <p>Ciudad: <?= $local_dat->ml_ciudad?></p>
+          <p>Comuna: <?= $local_dat->ml_comuna?></p>
+            <?
+            if($detalle != NULL){
+                $in = "";
+                if ($detalle->descripcion != ""){$in .="<p>Descripcion: ".$detalle->descripcion."</p>";}
+                if ($detalle->tipo_local != ""){$in .="<p>Tipo: ".$detalle->tipo_local."</p>";}
+                if ($detalle->tipo_comida != ""){$in .="<p>Comida: ".$detalle->tipo_comida."</p>";}
+                if ($detalle->telefono != ""){$in .="<p>Telefono: ".$detalle->telefono."</p>";}
+                echo $in;
+            }
+            ?>
         </div>
     </div>
         <div class="card-panel grey lighten-5 z-depth-1 hoverable row">
