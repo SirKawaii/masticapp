@@ -49,7 +49,7 @@ class incluye_estrellas{
 $(document).ready(function(){
 var options_calidad = {
     max_value: 5,
-    step_size: 0.5,
+    step_size: 1,
     initial_value: 0,
     symbols: {
             utf8_fork: {
@@ -71,7 +71,7 @@ var options_calidad = {
 
 var options_precio = {
     max_value: 5,
-    step_size: 0.5,
+    step_size: 1,
     initial_value: 0,
     symbols: {
             utf8_dinero: {

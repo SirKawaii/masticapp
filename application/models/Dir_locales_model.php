@@ -166,18 +166,48 @@ class Dir_locales_model extends CI_Model {
             return $resultado;
         }
 
-        public function modificar_detalles($id_local,$imagen,$descrip,$tipo,$comida,$tel){
+        public function modifica_locales($id,$nombre,$calle,$numero,$direccion,$detalle,$ciudad,$comuna,$region){
+
+            //actualiza datos
             $data = array(
-                'imagen' => $imagen,
-                'descripcion' => $descrip,
-                'tipo_local' => $tipo,
-                'tipo_comida' => $comida,
-                'telefono' => $tel
+                'ml_id' => $id,
+                'ml_nombre_local' => $nombre,
+                'ml_calle' => $calle,
+                'ml_numero' => $numero,
+                'ml_direccion' => $direccion,
+                'ml_detalle' => $detalle,
+                'ml_ciudad' => $ciudad,
+                'ml_comuna' => $comuna,
+                'ml_region' => $region
             );
-            $this->db->where('ml_id', $id_local);
+            $this->db->where('ml_id',$id);
+            $query[1] = $this->db->update('m_dir_locales', $data);
+            return $query;
+        }
+
+        public function modifica_detalles($id,$descripcion,$tipo_local,$tipo_comida,$telefono){
+            //actualiza detalles
+            $data = array(
+                'descripcion' => $descripcion,
+                'tipo_local' => $tipo_local,
+                'tipo_comida' => $tipo_comida,
+                'telefono' => $telefono
+            );
+            $this->db->where('ml_id', $id);
+            $query = $this->db->update('m_detalles_locales', $data);
+            return $query;
+
+        }
+
+        public function sube_imagen($id,$ruta){
+            $data = array(
+                'imagen' => $ruta
+            );
+            $this->db->where('ml_id', $id);
             $query = $this->db->update('m_detalles_locales', $data);
 
             return $query;
+
         }
 
 }

@@ -62,7 +62,7 @@ class Mapa extends CI_Controller{
             $marker = array();
             $marker['position'] = $list_locales_map->ml_calle.' '.$list_locales_map->ml_direccion.' '.$list_locales_map->ml_numero.','.$list_locales_map->ml_ciudad;
             $marker['infowindow_content'] = "<a href='".base_url()."local/index/".$list_locales_map->ml_id."'>".$list_locales_map->ml_nombre_local."</a>";
-            $marker['icon'] = 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=A|9999FF|000000';
+            $marker['icon'] = 'https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=A|9999FF|000000';
             $this->googlemaps->add_marker($marker);
         }
         $data['map'] = $this->googlemaps->create_map();

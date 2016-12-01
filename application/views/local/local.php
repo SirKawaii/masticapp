@@ -20,7 +20,7 @@ else{$numero = $local_dat->ml_numero;}
     <div class="col l4 s12 m10 offset-m1 offset-l2">
     <div class="card medium hoverable">
         <div class="card-image waves-effect waves-block waves-light">
-          <img class="activator" src="<? if ($detalle->imagen != ""){echo base_url('assets/imagenes/$detalle->imagen');}else{echo base_url('assets/imagenes/generico.jpg');} ?>">
+          <img class="activator" src="<? if ($detalle->imagen != ""){echo $detalle->imagen;}else{echo base_url('assets/imagenes/generico.jpg');} ?>">
         </div>
         <div class="card-content">
           <span class="card-title activator grey-text text-darken-4"><?= $local_dat->ml_nombre_local;?><i class="material-icons right">more_vert</i></span>
@@ -44,14 +44,15 @@ else{$numero = $local_dat->ml_numero;}
         </div>
     </div>
         <div class="card-panel grey lighten-5 z-depth-1 hoverable row">
-            <div class='col s8'><fieldset>
-                <legend>Calidad</legend>
-                <div class='rating_calidad' data-rate-value= <?= $calidad->prom_calidad ;?>></div>
-            </fieldset>
-            <fieldset>
-            <legend>Precio</legend>
-                <div class='rating_precio' data-rate-value=<?= $precio->prom_precio ;?>></div>
-            </fieldset>
+            <div class='col s8'>
+                <fieldset>
+                    <legend>Calidad</legend>
+                    <div class='rating_calidad' data-rate-value= <?= $calidad->prom_calidad ;?>></div>
+                </fieldset>
+                <fieldset>
+                    <legend>Precio</legend>
+                    <div class='rating_precio' data-rate-value=<?= $precio->prom_precio ;?>></div>
+                </fieldset>
             </div>
         <div class='col s4'>
             <fieldset ><legend>Puntaje</legend>
@@ -111,7 +112,7 @@ $(".rating_precio").on("change", function(ev, data){
             data:{id:<?= $precio->ml_id ?>,voto:data.to},
             success:function(respuesta){
                 console.log(respuesta);
-                Materialize.toast('Puntaje en Precio Agregado!', 4000) // 4000 is the duration of the toast
+                Materialize.toast('Puntaje en Precio Agregado!', 4000); // 4000 is the duration of the toast
             },
             fail:function(respuesta){
                 alert("el voto a fallado ");
@@ -128,7 +129,7 @@ $(".rating_calidad").on("change", function(ev, data){
             data:{id:<?= $precio->ml_id ?>,voto:data.to},
             success:function(respuesta){
                 console.log(respuesta);
-                Materialize.toast('Puntaje en Calidad Agregado!', 4000) // 4000 is the duration of the toast
+                Materialize.toast('Puntaje en Calidad Agregado!', 4000); // 4000 is the duration of the toast
             },
             fail:function(respuesta){
                 alert("el voto a fallado ");
@@ -146,7 +147,7 @@ $("#enviar-comentario").on("click", function(){
 
     if(id == "" | nombre == "" | comentario == ""){
         Materialize.toast('Por favor, rellena todos los campos.', 4000) // 4000 is the duration of the toast
-        Materialize.toast(id+" "+nombre+" "+comentario, 4000) // 4000 is the duration of the toast
+
     }else{
         $.ajax({
             url:"<?= base_url('local/agrega_comentario')?>" ,

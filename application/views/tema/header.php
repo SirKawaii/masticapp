@@ -20,7 +20,7 @@
 </head>
 <body>
 
- <nav class="light-blue lighten-1" role="navigation">
+ <nav class="orange" role="navigation">
     <div class="nav-wrapper container">
         <a id="logo-container" href="#" class="brand-logo"><?= $titulo; ?></a>
       <ul class="right hide-on-med-and-down">
@@ -31,11 +31,14 @@
       <ul id="nav-mobile" class="side-nav">
         <!-- Inicio Tarjeta Nav -->
         <li><div class="userView">
-          <img class="background responsive-img" src="http://www.combogamer.com/wp-content/uploads/2015/01/Ghost-in-the-Shell-Motoko-ComboGamer.jpg">
-          <a href="#!name"><span class="white-text name">Mit</span></a>
+          <img class="background orange responsive-img" src='<?= base_url('assets/img/masticapp.png'); ?>'>
           <a href="#!email"><span class="white-text email">Masticapp</span></a>
+            <br><br><br><br><br>
         </div></li>
         <?= $navegacion;?>
+      </ul>
+      <ul class="right">
+        <li><a href="<?= base_url('busqueda'); ?>"><i class="material-icons">search</i></a></li>
       </ul>
       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
     </div>
