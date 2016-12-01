@@ -8,7 +8,7 @@ class navegacion{
     public function construir_navegacion(){
         $ret_menu = "";
         foreach($this->arr_menu as $opcion){
-            $ret_menu .="<li>".anchor($opcion,$opcion,"class='waves-effect waves-teal'")."</li>";
+            $ret_menu .="<li>".anchor($opcion,$opcion,"class='waves-effect waves-light'")."</li>";
             $ret_menu .="<li><div class='divider'></div></li>";
         }
         return $ret_menu;

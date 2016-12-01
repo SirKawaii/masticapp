@@ -12,7 +12,7 @@ class incluye_estrellas{
     <style>
         .rating_precio
         {
-            font-size: 35px;
+            font-size: 32px;
         }
         .rating_precio .rate-hover-layer
         {
@@ -25,7 +25,7 @@ class incluye_estrellas{
 
         .rating_calidad
         {
-            font-size: 35px;
+            font-size: 32px;
         }
         .rating_calidad .rate-hover-layer
         {

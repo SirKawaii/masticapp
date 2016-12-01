@@ -45,19 +45,20 @@ else{$numero = $local_dat->ml_numero;}
     </div>
         <div class="card-panel grey lighten-5 z-depth-1 hoverable row">
             <div class='col s8'>
-                <fieldset>
-                    <legend>Calidad</legend>
+                <div>
+                    <p class="flow-text">Calidad</p>
                     <div class='rating_calidad' data-rate-value= <?= $calidad->prom_calidad ;?>></div>
-                </fieldset>
-                <fieldset>
-                    <legend>Precio</legend>
+                </div>
+                <div>
+                    <p class="flow-text">Precio</p>
                     <div class='rating_precio' data-rate-value=<?= $precio->prom_precio ;?>></div>
-                </fieldset>
+                </div>
             </div>
-        <div class='col s4'>
-            <fieldset ><legend>Puntaje</legend>
-            <h1 class='center-align'><?= $promedio ?></h1>
-            </fieldset>
+        <div class='col s3 center-align offset-s1'>
+            <div>
+            <p class="flow-text">Puntaje</p>
+            <p class="flow-text"><h3 class='center-align'><?= $promedio ?></h3></p>
+            </div>
         </div>
         </div>
     </div>
