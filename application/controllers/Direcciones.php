@@ -8,7 +8,7 @@ class Direcciones extends CI_Controller{
     function __construct(){
         parent::__construct();
         //helpers
-        $this->load->helper('url');
+        $this->load->helper('url','cookie');
         //bibliotecas
         $this->load->library('navegacion', array('mapa','busqueda'));
         //modelos
@@ -43,10 +43,15 @@ class Direcciones extends CI_Controller{
 
         $config = array();
         $config['center'] = 'auto';
-        $config['center'] = 'auto';
         $config['zoom'] = 'auto';
         $config['apiKey'] = 'AIzaSyBmBDBqhuIcPwFmj6pWDCO4ylTCmWQab-M';
         $config['directions'] = TRUE;
+        if ($this->input->cookie('cookie_ubicacion') == NULL){
+            $config['directionsStart'] = 'auto';
+        }
+        else{
+            $config['directionsStart'] = $this->input->cookie('cookie_ubicacion');
+            }
         $config['directionsStart'] = 'auto';
         $config['directionsEnd'] = $local->ml_calle.' '.$local->ml_direccion.' '.$local->ml_numero.','.$local->ml_ciudad;
         $config['directionsDivID'] = 'directionsDiv';

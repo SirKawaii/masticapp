@@ -8,7 +8,7 @@ class Mapa extends CI_Controller{
     function __construct(){
         parent::__construct();
         //helpers
-        $this->load->helper('url');
+        $this->load->helper('url','cookie');
         //bibliotecas
         $this->load->library('navegacion', array('mapa','busqueda'));
         //modelos
@@ -30,6 +30,7 @@ class Mapa extends CI_Controller{
     function index (){
 
 
+
         //Llamada a base de detos
         $data['basedatos'] = $this->dir_locales_model->obtener_locales();
         //creando Pagina
@@ -43,13 +44,21 @@ class Mapa extends CI_Controller{
         //importante
         $config['apiKey'] = 'AIzaSyBmBDBqhuIcPwFmj6pWDCO4ylTCmWQab-M';
         $this->googlemaps->initialize($config);
-        $config['onboundschanged'] = 'if (!centreGot) {
-        var mapCentre = map.getCenter();
-            marker_0.setOptions({
+
+
+        if ($this->input->cookie('cookie_ubicacion') == NULL){
+            $config['onboundschanged'] = 'if (!centreGot) {
+                var mapCentre = map.getCenter();
+                marker_0.setOptions({
                 position: new       google.maps.LatLng(mapCentre.lat(), mapCentre.lng())
-            });
-        }
-        centreGot = true;';
+                });
+                }
+                centreGot = true;';
+            $this->input->set_cookie('cookie_ubicacion',$config['onboundschanged']);
+            }
+        else{
+            $config['onboundschanged'] = $this->input->cookie('cookie_ubicacion');
+            }
 
         $config['geocodeCaching'] = TRUE;
         $this->googlemaps->initialize($config);

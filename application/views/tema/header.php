@@ -4,6 +4,8 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
   <title><?php echo $titulo; ?></title>
+  <link rel="icon" href="<?= base_url('assets/imagenes/favicon.gif');?>" type="image/gif" sizes="32x32">
+  <meta name="description" content="Buscador de Locales BAES - Encuentra locales asociados a la beca BAES Junaeb">
 
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
