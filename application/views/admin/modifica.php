@@ -157,7 +157,7 @@ $("#mod_local").on("click", function(){
     var telefono = $('#telefono').val();
 
         $.ajax({
-            url:"<?= base_url('modifica/actualiza_local/')?>" ,
+            url:"<?= base_url('modifica/actualiza_local/')?>",
             type:"POST",
             data:{id:id,
                   nombre:nombre,
@@ -168,18 +168,15 @@ $("#mod_local").on("click", function(){
                   ciudad:ciudad,
                   comuna:comuna,
                   region:region,
-                  imagen:imagen,
                   descripcion:descripcion,
                   tipo_local:t_local,
                   tipo_comida:t_comida,
                   telefono:telefono
                  },
-            contentType: false,
-            processData: false,
             success:function(respuesta){
                 console.log(respuesta);
                 $("#actualizador").addClass( "hide" );
-                $("#actualizador").html("<br><br><br><h1>Datos Actualizados</h1><br><br><br>");
+                $("#actualizador").html("<br><br><br><h1>Datos Actualizados</h1><br><br><br>descrip:"+descripcion);
                 $("#actualizador").removeClass("hide");
                 Materialize.toast('Datos Actualizados', 4000) // 4000 is the duration of the toast
             },

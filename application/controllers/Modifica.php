@@ -91,16 +91,15 @@ class Modifica extends CI_Controller{
             $detalle = $this->input->post("detalle");
             $ciudad = $this->input->post("ciudad");
             $comuna = $this->input->post("comuna");
-            $region = $this->input->post("comina");
+            $region = $this->input->post("region");
             $descripcion = $this->input->post("descripcion");
             $tipo_local = $this->input->post("tipo_local");
             $tipo_comida = $this->input->post("tipo_comida");
             $telefono = $this->input->post("telefono");
 
-
-            $post[0] = $this->dir_locales_model->modifica_locales($id,$nombre,$calle,$numero,$direccion,$detalle,$ciudad,$comuna,$region);
-            $post[1] = $this->dir_locales_model->modifica_detalles($descripcion,$tipo_local,$tipo_comida,$telefono);
-            echo json_encode($post);
+            $this->dir_locales_model->modifica_locales($id,$nombre,$calle,$numero,$direccion,$detalle,$ciudad,$comuna,$region);
+            $post = $this->dir_locales_model->modifica_detalles($id,$descripcion,$tipo_local,$tipo_comida,$telefono);
+            echo json_encode($descripcion);
         }
 
 

@@ -27,7 +27,6 @@
                 type:"POST",
                 data:{buscar:valor},
                 success:function(respuesta){
-                    console.log(respuesta);
                     var registros = eval(respuesta);
                     html="";
                     html= "<table class='centered striped highlight'><thead><tr>";
@@ -51,7 +50,7 @@
 <body>
 <div class="container">
     <div class="row">
-        <div class="col s6 m8 l10 hoverable ">
+        <div class="col s8 m8 l10 hoverable ">
             <?
             echo form_open();
             // Parametros
@@ -66,8 +65,8 @@
             echo form_close();
             ?>
         </div>
-        <div class="col">
-            <a class="boton btn-floating btn-large waves-effect waves-light red"><i class="material-icons">search</i></a>
+        <div class="col s4 m4 l2">
+            <a class="right boton btn-floating btn-large waves-effect waves-light red hoverable"><i class="material-icons">search</i></a>
         </div>
     </div>
 
