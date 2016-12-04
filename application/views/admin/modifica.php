@@ -87,7 +87,7 @@ $detalle = $det[0];
                     <div class="col s12 l12 m12">
                         <div class="input-field col s12">
                             <i class="material-icons prefix">account_circle</i>
-                            <textarea value="<?= $detalle->descripcion ?>" id="descripcion" class="materialize-textarea"></textarea>
+                            <textarea value="<?= $detalle->descripcion ?>" id="descripcion" class="materialize-textarea"><?= $detalle->descripcion ?></textarea>
                             <label for="descripcion">Descripcion</label>
                         </div>
                         <div class="input-field col s12">

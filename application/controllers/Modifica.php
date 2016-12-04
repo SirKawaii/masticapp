@@ -8,7 +8,7 @@ class Modifica extends CI_Controller{
     function __construct(){
         parent::__construct();
         //helpers
-        $this->load->helper('url');
+        $this->load->helper('url','form');
         //bibliotecas
         $this->load->library('navegacion', array('mapa','busqueda'));
         //modelos
