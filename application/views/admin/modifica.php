@@ -174,9 +174,8 @@ $("#mod_local").on("click", function(){
                   telefono:telefono
                  },
             success:function(respuesta){
-                console.log(respuesta);
                 $("#actualizador").addClass( "hide" );
-                $("#actualizador").html("<br><br><br><h1>Datos Actualizados</h1><br><br><br>descrip:"+descripcion);
+                $("#actualizador").html("<br><br><br><h1>Datos Actualizados</h1><br><br><br>");
                 $("#actualizador").removeClass("hide");
                 Materialize.toast('Datos Actualizados', 4000) // 4000 is the duration of the toast
             },

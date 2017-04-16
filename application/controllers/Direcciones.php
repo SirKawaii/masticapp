@@ -46,15 +46,11 @@ class Direcciones extends CI_Controller{
         $config['zoom'] = 'auto';
         $config['apiKey'] = 'AIzaSyBmBDBqhuIcPwFmj6pWDCO4ylTCmWQab-M';
         $config['directions'] = TRUE;
-        if ($this->input->cookie('cookie_ubicacion') == NULL){
-            $config['directionsStart'] = 'auto';
-        }
-        else{
-            $config['directionsStart'] = $this->input->cookie('cookie_ubicacion');
-            }
         $config['directionsStart'] = 'auto';
         $config['directionsEnd'] = $local->ml_calle.' '.$local->ml_direccion.' '.$local->ml_numero.','.$local->ml_ciudad;
         $config['directionsDivID'] = 'directionsDiv';
+        $config['directionsMode'] = 'WALKING';
+        $config['geocodeCaching'] = TRUE;
         $this->googlemaps->initialize($config);
         $data['map'] = $this->googlemaps->create_map();
 

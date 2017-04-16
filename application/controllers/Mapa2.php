@@ -1,23 +1,22 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Busqueda extends CI_Controller{
+class Mapa2 extends CI_Controller{
 
     public $pagina, $nombreSitio, $variables;
 
     function __construct(){
         parent::__construct();
         //helpers
-        $this->load->helper('url');
+        $this->load->helper('url','cookie');
         //bibliotecas
         $this->load->library('navegacion', array('mapa','busqueda'));
-
         //modelos
         $this->load->model('dir_locales_model');
 
         //inicializacion de Atributos Globales
         $this->nombreSitio = 'Masticapp';
-        $this->pagina = 'Busqueda';
+        $this->pagina = 'Mapa';
         $this->variables['navegacion'] = $this->navegacion->construir_Navegacion();
 
         $this->variables['nombreSitio'] = $this->nombreSitio;
@@ -28,20 +27,25 @@ class Busqueda extends CI_Controller{
 
     }
 
-    public function index (){
-        $this->load->view('tema/header',$this->variables);
-        $this->load->view('mapa/busqueda');
-        $this->load->view('tema/footer',$this->variables);
+    function index (){
+
+
+
+        //Llamada a base de detos
+        $data['basedatos'] = $this->dir_locales_model->obtener_locales_array();
+        //creando Pagina
+        $this->load->view('mapa/mapa2',$data);
+
     }
 
+    function ingresar(id){
+        $id = $this->input->post("id");
+        $direccion = $this->input->post("direccion");
+        $lat = $this->input->post("lat");
+        $lng = $this->input->post("lng");
 
-    public function user_data_submit() {
-        $buscar = $this->input->post("buscar");
-        $post = $this->dir_locales_model->buscar_a($buscar);
-        echo json_encode($post);
+        $this->dir_locales_model->ingresa_marcadores($id,$direccion,$lat,$lng);
+
     }
 }
-
-
-
 ?>

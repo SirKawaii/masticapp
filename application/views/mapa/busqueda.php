@@ -1,5 +1,10 @@
 <script>
     $(document).ready(function(valor){
+
+        window_size = $(window).height();
+        $('#resultado_busqueda').css('min-height', window_size);
+
+
         $(".input_box").on("input", function(){
             buscar();
         });

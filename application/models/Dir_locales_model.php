@@ -18,6 +18,14 @@ class Dir_locales_model extends CI_Model {
                 else{return false;}
         }
 
+        public function obtener_locales_array(){
+                $query = $this->db->get('m_dir_locales');
+                if ($query->num_rows()>0){
+                        return $query->result_array();
+                }
+                else{return false;}
+        }
+
         public function buscar_a($valor){
             $this->db->like('ml_nombre_local',$valor);
             $this->db->or_like('ml_ciudad',$valor);
@@ -208,6 +216,22 @@ class Dir_locales_model extends CI_Model {
 
             return $query;
 
+        }
+
+        public function ingresa_marcadores($id,$direccion,$lat,$lng){
+        $query = $this->db->get_where('ml_id', array('ml_id' => $id_local));
+            if($query->num_rows() > 0 ){
+                return "true";
+            }
+            else{
+                $data = array(
+                    'ml_id' => $id,
+                    'direccion'=> $direccion,
+                    'lat' => lat,
+                    'lng' => lng
+                );
+                $this->db->insert('m_detalles_locales', $data);
+            }
         }
 
 }
