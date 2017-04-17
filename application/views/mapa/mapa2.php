@@ -8,7 +8,7 @@ $datos = json_encode($basedatos);
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>Obtenedor de direcciones</title>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
         <script type="text/javascript">
             $(function() {
                 inicio();
@@ -28,8 +28,10 @@ $datos = json_encode($basedatos);
            async function localizar(){
                var TOTAL = <?= $totalDB; ?>;
                var ULTIMO = <?= $ultimo; ?>;
+               var LIMITE = (Math.abs(TOTAL - ((ULTIMO+TOTAL)-2400)))+ULTIMO;
+               $("#ultimo").html("<p>Ultimo marcardor = "+ULTIMO+" -TOTAL = "+TOTAL+" - Limite = "+LIMITE+"</p>");
                $('#progress').show();
-                for(i=ULTIMO;i<TOTAL;i++){
+                for(i=ULTIMO;i<=LIMITE;i++){
                     locales = <?= $datos?>;
                     var id = locales[i]['ml_id'];
                     var calle = locales[i]['ml_calle'];
@@ -46,12 +48,16 @@ $datos = json_encode($basedatos);
 
                     //peticion de geolocalizacion
                     $.ajax({
-                        url: "https://maps.googleapis.com/maps/api/geocode/json?address="+calle+"&key=AIzaSyDjc1jrRTTOiJkuuxqOFiWl7-p7WJy84pI&language=es&region=CL",
+                        url: "https://maps.googleapis.com/maps/api/geocode/json?address="+calle+"&key=AIzaSyBmBDBqhuIcPwFmj6pWDCO4ylTCmWQab-M&language=es&region=CL",
                         dataType:"json"
                     }).done(function(result) {
                         if(result.status != "OK"){
                             $('#stat'+i).append(result.status);
                             $('#estado').append(result.status);
+                            if(result.status == "OVER_QUERY_LIMIT"){
+                                $('#estado').append(result.status);
+                                break;
+                            }
                         }
                         else{
                             $('#stat'+i).append(result.status);

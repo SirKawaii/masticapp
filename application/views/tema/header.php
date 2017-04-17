@@ -4,16 +4,16 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
   <title><?php echo $titulo; ?></title>
-  <link rel="icon" href="<?= base_url('assets/imagenes/favicon.gif');?>" type="image/gif" sizes="32x32">
+  <link rel="icon" href="<?= base_url('assets/img/micon.png');?>" type="image/gif" sizes="32x32">
   <meta name="description" content="Buscador de Locales BAES - Encuentra locales asociados a la beca BAES Junaeb">
 
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="<?php echo base_url('assets/css/materialize.css') ?>" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="<?php echo base_url('assets/css/materialize.min.css') ?>" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="<?php echo base_url('assets/css/style.css') ?>" type="text/css" rel="stylesheet" media="screen,projection"/>
   <!--Scripts -->
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script src="<?php echo base_url('assets/js/materialize.js') ?>"></script>
+  <script src="<?php echo base_url('assets/js/materialize.min.js') ?>"></script>
   <script src="<?php echo base_url('assets/js/init.js') ?>"></script>
     <!-- De ser nesesario -->
     <? if (isset($estrellas)) {
@@ -33,7 +33,7 @@
       <ul id="nav-mobile" class="side-nav">
         <!-- Inicio Tarjeta Nav -->
         <li><div class="userView">
-          <img class="background orange responsive-img" src='<?= base_url('assets/img/masticapp.png'); ?>'>
+          <img class="background orange responsive-img" src='<?= base_url('assets/img/masticappnew.png'); ?>'>
           <a href="#!email"><span class="white-text email">Masticapp</span></a>
             <br><br><br><br><br>
         </div></li>

@@ -253,8 +253,13 @@ class Dir_locales_model extends CI_Model {
         }
 
         public function ultimo_marcador(){
-            $query = $last_row=$this->db->select('ml_id')->order_by('ml_id',"desc")->limit(1)->get('marcadores')->result();
-            return $query[0]->ml_id;
+            $query = $last_row=$this->db->select('ml_id')->order_by('ml_id',"desc")->limit(1)->get('marcadores');
+            if ($query->num_rows()>0){
+                $cosa = $query->result();
+                return $cosa[0]->ml_id;
+            }
+            else{return 0;}
+
         }
 
 }
