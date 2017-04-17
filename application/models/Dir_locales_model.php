@@ -26,6 +26,12 @@ class Dir_locales_model extends CI_Model {
                 else{return false;}
         }
 
+        public function total_locales(){
+            $query = $this->db->get('m_dir_locales');
+            $total = $query->num_rows();
+            return $total;
+        }
+
         public function buscar_a($valor){
             $this->db->like('ml_nombre_local',$valor);
             $this->db->or_like('ml_ciudad',$valor);
@@ -219,19 +225,36 @@ class Dir_locales_model extends CI_Model {
         }
 
         public function ingresa_marcadores($id,$direccion,$lat,$lng){
-        $query = $this->db->get_where('ml_id', array('ml_id' => $id_local));
+            $this->db->where('ml_id',$id);
+            $query = $this->db->get('marcadores');
             if($query->num_rows() > 0 ){
-                return "true";
+                return false;
             }
             else{
                 $data = array(
                     'ml_id' => $id,
                     'direccion'=> $direccion,
-                    'lat' => lat,
-                    'lng' => lng
+                    'lat' => $lat,
+                    'lng' => $lng
                 );
-                $this->db->insert('m_detalles_locales', $data);
+                $this->db->insert('marcadores', $data);
+                return true;
             }
+
+        }
+
+        public function obtener_marcador($id){
+            $this->db->where('ml_id',$id);
+            $query = $this->db->get('marcadores');
+            if ($query->num_rows()>0){
+                return $query->result();
+            }
+            else{return false;}
+        }
+
+        public function ultimo_marcador(){
+            $query = $last_row=$this->db->select('ml_id')->order_by('ml_id',"desc")->limit(1)->get('marcadores')->result();
+            return $query[0]->ml_id;
         }
 
 }

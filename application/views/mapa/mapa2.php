@@ -11,17 +11,25 @@ $datos = json_encode($basedatos);
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
         <script type="text/javascript">
             $(function() {
-                localizar();
+                inicio();
+                $('#progress').hide();
             });
 
             function sleep(ms) {
               return new Promise(resolve => setTimeout(resolve, ms));
             }
+
+            function inicio(){
+                ultimo = <?= $ultimo;?>;
+                $("#ultimo").html("<p>Ultimo marcardor = "+ultimo+"</p>");
+            }
          </script>
         <script type="application/javascript">
            async function localizar(){
+               var TOTAL = <?= $totalDB; ?>;
+               var ULTIMO = <?= $ultimo; ?>;
                $('#progress').show();
-                for(i=0;i<10;i++){
+                for(i=ULTIMO;i<TOTAL;i++){
                     locales = <?= $datos?>;
                     var id = locales[i]['ml_id'];
                     var calle = locales[i]['ml_calle'];
@@ -36,11 +44,12 @@ $datos = json_encode($basedatos);
                     var br = $("<br>");
                     $("#datos").append(direccion,divlat,divlng,direccion_format,estado,br);
 
+                    //peticion de geolocalizacion
                     $.ajax({
                         url: "https://maps.googleapis.com/maps/api/geocode/json?address="+calle+"&key=AIzaSyDjc1jrRTTOiJkuuxqOFiWl7-p7WJy84pI&language=es&region=CL",
                         dataType:"json"
                     }).done(function(result) {
-                        if(result.status == "ZERO_RESULTS"){
+                        if(result.status != "OK"){
                             $('#stat'+i).append(result.status);
                             $('#estado').append(result.status);
                         }
@@ -61,7 +70,17 @@ $datos = json_encode($basedatos);
                                       lng:result.results[0].geometry.location.lng,
                                      },
                                 success:function(respuesta){
-                                    $('#estado').append(" Subiendo ");
+
+                                    if(respuesta == true){
+                                        $('#estado').append(" Subiendo ");
+                                        console.log("Agregado id = "+id);
+                                    }
+                                    else{
+                                        $('#estado').append(" Ya existe.");
+                                        console.log("ya existe id = "+id);
+                                    }
+
+                                    console.log(respuesta);
                                 },
                                 fail:function(respuesta){
                                     $('#estado').append(" Error");
@@ -84,6 +103,10 @@ $datos = json_encode($basedatos);
     </head>
     <body>
         <div class="container">
+            <div id='control'>
+                <div id="ultimo"></div>
+                <button onclick="localizar()">Iniciar</button>
+            </div>
             <div id="estado" class="l-10">
             </div>
             <div id="progress">

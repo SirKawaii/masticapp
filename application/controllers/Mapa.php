@@ -33,6 +33,7 @@ class Mapa extends CI_Controller{
 
         //Llamada a base de detos
         $data['basedatos'] = $this->dir_locales_model->obtener_locales();
+
         //creando Pagina
 
         $this->load->view('tema/header', $this->variables);
@@ -44,23 +45,16 @@ class Mapa extends CI_Controller{
         //importante
         $config['apiKey'] = 'AIzaSyBmBDBqhuIcPwFmj6pWDCO4ylTCmWQab-M';
         $this->googlemaps->initialize($config);
-
-
-        if ($this->input->cookie('cookie_ubicacion') == NULL){
-            $config['onboundschanged'] = 'if (!centreGot) {
+        $config['onboundschanged'] = 'if (!centreGot) {
                 var mapCentre = map.getCenter();
                 marker_0.setOptions({
                 position: new       google.maps.LatLng(mapCentre.lat(), mapCentre.lng())
                 });
                 }
                 centreGot = true;';
-            $this->input->set_cookie('cookie_ubicacion',$config['onboundschanged']);
-            }
-        else{
-            $config['onboundschanged'] = $this->input->cookie('cookie_ubicacion');
-            }
+        $this->input->set_cookie('cookie_ubicacion',$config['onboundschanged']);
 
-        $config['geocodeCaching'] = TRUE;
+        $config['geocodeCaching'] = FALSE;
         $this->googlemaps->initialize($config);
 
 
@@ -69,9 +63,17 @@ class Mapa extends CI_Controller{
 
         foreach($data['basedatos']->result() as $list_locales_map ){
             $marker = array();
-            $marker['position'] = $list_locales_map->ml_calle.' '.$list_locales_map->ml_direccion.' '.$list_locales_map->ml_numero.','.$list_locales_map->ml_ciudad;
+            $marcador = $this->dir_locales_model->obtener_marcador($list_locales_map->ml_id);
+            if($marcador == FALSE){
+                $lat = 0;
+                $lng = 0;
+            }else{
+                $lat = $marcador[0]->lat;
+                $lng = $marcador[0]->lng;
+            }
+            $marker['position'] = $lat.",".$lng;
             $marker['infowindow_content'] = "<a href='".base_url()."local/index/".$list_locales_map->ml_id."'>".$list_locales_map->ml_nombre_local."</a>";
-            $marker['icon'] = 'https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=A|9999FF|000000';
+            $marker['icon'] = 'assets/img/micon.png';
             $this->googlemaps->add_marker($marker);
         }
         $data['map'] = $this->googlemaps->create_map();

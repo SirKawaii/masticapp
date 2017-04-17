@@ -34,6 +34,7 @@ class Direcciones extends CI_Controller{
         $resultado= json_encode($this->dir_locales_model->obtener_local($id_local));
         $rere = json_decode($resultado);
         $local = $rere[0];
+        $marcador = $this->dir_locales_model->obtener_marcador($id_local);
         //creando Pagina
 
 
@@ -47,7 +48,14 @@ class Direcciones extends CI_Controller{
         $config['apiKey'] = 'AIzaSyBmBDBqhuIcPwFmj6pWDCO4ylTCmWQab-M';
         $config['directions'] = TRUE;
         $config['directionsStart'] = 'auto';
-        $config['directionsEnd'] = $local->ml_calle.' '.$local->ml_direccion.' '.$local->ml_numero.','.$local->ml_ciudad;
+        if($marcador == FALSE){
+             $lat = 0;
+            $lng = 0;
+        }else{
+            $lat = $marcador[0]->lat;
+            $lng = $marcador[0]->lng;
+        }
+        $config['directionsEnd'] = $lat.",".$lng;
         $config['directionsDivID'] = 'directionsDiv';
         $config['directionsMode'] = 'WALKING';
         $config['geocodeCaching'] = TRUE;

@@ -33,18 +33,21 @@ class Mapa2 extends CI_Controller{
 
         //Llamada a base de detos
         $data['basedatos'] = $this->dir_locales_model->obtener_locales_array();
+        $data['totalDB'] = $this->dir_locales_model->total_locales();
+        $data['ultimo'] = $this->dir_locales_model->ultimo_marcador();
         //creando Pagina
         $this->load->view('mapa/mapa2',$data);
 
     }
 
-    function ingresar(id){
+    function ingresar(){
         $id = $this->input->post("id");
         $direccion = $this->input->post("direccion");
         $lat = $this->input->post("lat");
         $lng = $this->input->post("lng");
 
-        $this->dir_locales_model->ingresa_marcadores($id,$direccion,$lat,$lng);
+        $result = $this->dir_locales_model->ingresa_marcadores($id,$direccion,$lat,$lng);
+        echo $result;
 
     }
 }
