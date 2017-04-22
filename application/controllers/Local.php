@@ -58,6 +58,8 @@ class Local extends CI_Controller{
 
         $this->load->view('local/local',$local);
 
+        $this->load->view('local/opciones');
+
         $this->load->view('tema/footer', $this->variables);
 
     }

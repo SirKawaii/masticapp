@@ -101,9 +101,13 @@ else{$numero = $local_dat->ml_numero;}
             </div>
         </div>
     </div>
+
+
+
 </div>
 
 </div>
+
 <script>
 $(".rating_precio").on("change", function(ev, data){
     console.log(data.from, data.to);

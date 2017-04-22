@@ -28,7 +28,7 @@ $datos = json_encode($basedatos);
            async function localizar(){
                var TOTAL = <?= $totalDB; ?>;
                var ULTIMO = <?= $ultimo; ?>;
-               var LIMITE = (Math.abs(TOTAL - ((ULTIMO+TOTAL)-2400)))+ULTIMO;
+               var LIMITE = (Math.abs(TOTAL - ((ULTIMO+TOTAL)-3752)))+ULTIMO;
                $("#ultimo").html("<p>Ultimo marcardor = "+ULTIMO+" -TOTAL = "+TOTAL+" - Limite = "+LIMITE+"</p>");
                $('#progress').show();
                 for(i=ULTIMO;i<=LIMITE;i++){
@@ -56,7 +56,7 @@ $datos = json_encode($basedatos);
                             $('#estado').append(result.status);
                             if(result.status == "OVER_QUERY_LIMIT"){
                                 $('#estado').append(result.status);
-                                break;
+                                i = 1000000000;
                             }
                         }
                         else{
