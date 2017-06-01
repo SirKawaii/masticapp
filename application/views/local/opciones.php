@@ -4,10 +4,10 @@
         <div class="card-panel hoverable">
             <div class="row">
                 <div class="col s6">
-                    <p>Sugerir Imagen</p>
+                    <a class="waves-effect waves-light btn orange">Sugerir Imagen</a>
                 </div>
                 <div class="col s6">
-                    <p>Incorrecto?</p>
+                    <a class="waves-effect waves-light btn orange">¿Incorrecto?</a>
                 </div>
             </div>
         </div>

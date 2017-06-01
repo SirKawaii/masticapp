@@ -13,28 +13,30 @@ class Modifica extends CI_Controller{
         $this->load->library('navegacion', array('mapa','busqueda'));
         //modelos
         $this->load->model('dir_locales_model');
+        $this->load->model('user');
 
         //inicializacion de Atributos Globales
         $this->nombreSitio = 'Masticapp';
         $this->pagina = 'Modificar Locales';
         $this->variables['navegacion'] = $this->navegacion->construir_Navegacion();
-
         $this->variables['nombreSitio'] = $this->nombreSitio;
         $this->variables['titulo'] = ucfirst($this->pagina); // Capitalize the first letter
-
-
         //FinAtributos
 
 
     }
 
     function index (){
-
-        //cargar vistas
-        $this->load->view('tema/header',$this->variables);
-        $this->load->view('admin/busca');
-        $this->load->view('tema/footer',$this->variables);
-
+        $data = array();
+        if($this->session->userdata('isUserLoggedIn')){
+            $data['user'] = $this->user->getRows(array('id_usuario'=>$this->session->userdata('userId')));
+                //cargar vistas
+                $this->load->view('tema/header',$this->variables);
+                $this->load->view('admin/busca');
+                $this->load->view('tema/footer',$this->variables);
+        }else{
+            redirect('users/login');
+        }
     }
 
     function cambio($id_local){

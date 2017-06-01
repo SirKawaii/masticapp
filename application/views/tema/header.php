@@ -38,6 +38,9 @@
             <br><br><br><br><br>
         </div></li>
         <?= $navegacion;?>
+        <li>
+            <?= anchor("users/login","admin","class='waves-effect waves-light'"); ?>
+        </li>
       </ul>
       <ul class="right waves-effect waves-light">
         <li><a href="<?= base_url('busqueda'); ?>"><i class="material-icons">search</i></a></li>
