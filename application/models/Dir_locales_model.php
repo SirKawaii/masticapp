@@ -200,16 +200,31 @@ class Dir_locales_model extends CI_Model {
         }
 
         public function modifica_detalles($id,$descripcion,$tipo_local,$tipo_comida,$telefono){
-            //actualiza detalles
-            $data = array(
-                'descripcion' => $descripcion,
-                'tipo_local' => $tipo_local,
-                'tipo_comida' => $tipo_comida,
-                'telefono' => $telefono
-            );
-            $this->db->where('ml_id', $id);
-            $query = $this->db->update('m_detalles_locales', $data);
+            //actualiza detalles aqui
+            $this->db->where('ml_id',$id);
+            $query = $this->db->get('m_detalles_locales');
+            if($query->num_rows() > 0 ){
+                $data = array(
+                    'descripcion' => $descripcion,
+                    'tipo_local' => $tipo_local,
+                    'tipo_comida' => $tipo_comida,
+                    'telefono' => $telefono
+                );
+                $this->db->where('ml_id', $id);
+                $query = $this->db->update('m_detalles_locales', $data);
             return $query;
+            }
+            else{
+                $data = array(
+                    'ml_id' => $id,
+                    'descripcion' => $descripcion,
+                    'tipo_local' => $tipo_local,
+                    'tipo_comida' => $tipo_comida,
+                    'telefono' => $telefono
+                );
+                $query = $this->db->insert('m_detalles_locales', $data);
+                return $query;
+            }
 
         }
 
@@ -262,5 +277,22 @@ class Dir_locales_model extends CI_Model {
 
         }
 
-}
+        public function nuevo_local($nombre,$calle,$numero,$direccion,$detalle,$ciudad,$comuna,$region){
+
+            $datalocal = array(
+                'ml_nombre_local' => $nombre,
+                'ml_calle' => $calle,
+                'ml_numero' => $numero,
+                'ml_direccion' => $direccion,
+                'ml_detalle' => $detalle,
+                'ml_ciudad' => $ciudad,
+                'ml_comuna' => $comuna,
+                'ml_region' => $region
+            );
+
+            $this->db->insert('m_dir_locales', $datalocal);
+            return $this->db->insert_id();
+        }
+
+}//fin modelo.
 ?>

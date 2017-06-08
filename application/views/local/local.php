@@ -165,7 +165,7 @@ $("#enviar-comentario").on("click", function(){
                 Materialize.toast('Comentario Agregado', 4000) // 4000 is the duration of the toast
             },
             fail:function(respuesta){
-                alert("el voto a fallado ");
+                Materialize.toast('El voto a fallado', 4000);
                 console.log(respuesta);
             }
 

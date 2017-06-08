@@ -42,6 +42,7 @@ class Local extends CI_Controller{
         //obtener puntaje del local
         $post = $this->dir_locales_model->verificar_puntaje($id_local);
         $local['puntaje'] = $post;
+        $local['id'] = $id_local;
 
         //cargar libreria de rater
         $this->load->library('incluye_estrellas');
@@ -59,6 +60,10 @@ class Local extends CI_Controller{
         $this->load->view('local/local',$local);
 
         $this->load->view('local/opciones');
+        //opciones de administrador.
+        if($this->session->userdata('isUserLoggedIn')){
+            $this->load->view('local/modificarLocal',$local);
+        }
 
         $this->load->view('tema/footer', $this->variables);
 

@@ -39,7 +39,7 @@
         </div></li>
         <?= $navegacion;?>
         <li>
-            <?= anchor("users/login","admin","class='waves-effect waves-light'"); ?>
+            <?= anchor("users","admin","class='waves-effect waves-light'"); ?>
         </li>
       </ul>
       <ul class="right waves-effect waves-light">

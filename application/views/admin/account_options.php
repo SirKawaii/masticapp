@@ -6,7 +6,7 @@
             <?= anchor("modifica","Buscar Local","class='col s12 waves-effect waves-light btn orange'"); ?>
         </div>
         <div class="col s12 l3">
-            <a class="col s12 waves-effect waves-light btn orange">Agregar Local</a>
+            <?= anchor("agregar","Agregar Local","class='col s12 waves-effect waves-light btn orange'"); ?>
         </div>
         <div class="col s12 l3">
             <a class="col s12 waves-effect waves-light btn orange">Usuarios</a>
@@ -17,5 +17,5 @@
         </center>
     </div>
 </div>
-<p class="footInfo"><a href="<? base_url(); ?>users/registration">Crear nuevo usuario.</a></p>
+<?= anchor("users/registration","Crear Nuevo Usuario");?>
 </div>

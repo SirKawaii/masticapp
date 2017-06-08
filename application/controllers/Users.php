@@ -17,9 +17,15 @@ class Users extends CI_Controller {
         $this->variables['titulo'] = ucfirst($this->pagina); // Capitalize the first letter
     }
 
-    /*
-     * User account information
-     */
+    function index(){
+        $data = array();
+        if($this->session->userdata('isUserLoggedIn')){
+            redirect('users/account');
+        }else{
+            redirect('users/login');
+        }
+    }
+
     public function account(){
         $data = array();
         if($this->session->userdata('isUserLoggedIn')){
