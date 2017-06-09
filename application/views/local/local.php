@@ -11,8 +11,8 @@ $detalle = $det[0];
 //variables de local
 $promedio = round((($precio->prom_precio + $calidad->prom_calidad)/2),1);
 
-if (isset($local_dat->ml_numero)){$numero = 'S/N';}
-else{$numero = $local_dat->ml_numero;}
+if ($local_dat->ml_numero != ""){$numero = $local_dat->ml_numero;}
+else{$numero ='S/N';}
 
 ?>
 <div id="container">

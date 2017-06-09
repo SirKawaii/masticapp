@@ -294,5 +294,12 @@ class Dir_locales_model extends CI_Model {
             return $this->db->insert_id();
         }
 
+        public function elimina_local($id){
+            $tables = array('m_dir_locales', 'marcadores', 'm_detalles_locales','puntaje_calidad','puntaje_precio','comentarios');
+            $this->db->where('ml_id',$id);
+            return $this->db->delete($tables);
+
+        }
+
 }//fin modelo.
 ?>

@@ -112,6 +112,40 @@ class Modifica extends CI_Controller{
             echo json_encode($descripcion);
         }
 
+        function elimina($id){
+            $dato['id'] = $id;
+            $data = array();
+            if($this->session->userdata('isUserLoggedIn')){
+                $data['user'] = $this->user->getRows(array('id_usuario'=>$this->session->userdata('userId')));
+                //cargar vistas
+                $this->load->view('tema/header',$this->variables);
+                $this->load->view('admin/elimina',$dato);
+                $this->load->view('tema/footer',$this->variables);
+            }else{
+                redirect('users/login');
+            }
+
+        }
+
+        public function eliminarLocal($id){
+            $data = array();
+            if($this->session->userdata('isUserLoggedIn')){
+                $data['user'] = $this->user->getRows(array('id_usuario'=>$this->session->userdata('userId')));
+                //Proceder a eliminar
+                if($id){
+                    $id = $this->input->post("id");
+                    $result = $this->dir_locales_model->elimina_local($id);
+                    return $result;
+                }
+                else{
+                    return FALSE;
+                }
+            }else{
+                redirect('users/login');
+            }
+
+        }
+
 
 }
 
