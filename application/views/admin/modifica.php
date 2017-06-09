@@ -175,9 +175,10 @@ $("#mod_local").on("click", function(){
                  },
             success:function(respuesta){
                 $("#actualizador").addClass( "hide" );
-                $("#actualizador").html("<br><br><br><h1>Datos Actualizados</h1><br><br><br>");
                 $("#actualizador").removeClass("hide");
-                Materialize.toast('Datos Actualizados', 4000) // 4000 is the duration of the toast
+                url = "<a href='<?= base_url('local/index/'.$local_dat->ml_id) ;?>' class='col s12 waves-effect waves-light btn orange'>Volver a"+nombre+"</a>";
+                $("#actualizador").html("<center><h3>Local Actualizado</h3></center>" + url);
+                Materialize.toast('Datos Actualizados', 3000) // 4000 is the duration of the toast
             },
             fail:function(respuesta){
                 alert("la actualizacion Falló");
