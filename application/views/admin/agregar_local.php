@@ -153,19 +153,20 @@ function sendData(id)
 
 
      $.ajax({
-               type:"POST",
-               url:"<?php echo base_url('agregar/subir/');?>"+id,
-               data:data,
-               mimeType: "multipart/form-data",
-                contentType: false,
-                cache: false,
-                processData: false,
-               success:function(data)
-              {
+            type:"POST",
+            url:"<?php echo base_url('agregar/subir/');?>"+id,
+            data:data,
+            mimeType: "multipart/form-data",
+            contentType: false,
+            cache: false,
+            processData: false,
+            success:function(data)
+            {
                 console.log(data);
                 Materialize.toast('Imagen Subida correctamente', 4000);
-
-               }
+                url = "<a href='<?= base_url('local/index/');?>"+id+"' class='col s12 waves-effect waves-light btn orange'>Ir al Local ingresado</a>";
+                $("#actualizador").html("<p>Local Agregado</p>" + url);
+            }
        });
 
 }

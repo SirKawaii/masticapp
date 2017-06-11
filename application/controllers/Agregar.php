@@ -63,12 +63,18 @@ class Agregar extends CI_Controller{
     }
 
     public function subir($id_local){
+
         $attachment_file=$_FILES["attachment_file"];
               $output_dir = 'assets/imagenes/locales/';
               $fileName = $_FILES["attachment_file"]["name"];
 		move_uploaded_file($_FILES["attachment_file"]["tmp_name"],$output_dir.$fileName);
 
-        $ruta = base_url($output_dir.$fileName);
+        if($fileName == NULL){
+            $ruta = NULL;
+        }else{
+            $ruta = base_url($output_dir.$fileName);
+        }
+
         $this->dir_locales_model->sube_imagen($id_local,$ruta);
 
 		echo "El archivo se ha subido correctamente";
