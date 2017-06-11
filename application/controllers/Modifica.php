@@ -56,7 +56,6 @@ class Modifica extends CI_Controller{
                 else{
                     $direccionlocal = auto;
                 }
-
                 $local['direcciongeo'] = $direccionlocal;
 
                 //cargando geolocalizacion.
@@ -77,6 +76,21 @@ class Modifica extends CI_Controller{
                 $marker['onclick'] = '$(\'#lat\').val(event.latLng.lat());
                     $(\'#lng\').val(event.latLng.lng());';
                 $this->googlemaps->add_marker($marker);
+                //anterior marcador
+                $marcador = $this->dir_locales_model->obtener_marcador($id_local);
+                if($marcador == FALSE){
+                    $lat = 0;
+                    $lng = 0;
+                }else{
+                    $lat = $marcador[0]->lat;
+                    $lng = $marcador[0]->lng;
+                }
+                $marker['position'] = $lat.",".$lng;
+                $marker['draggable'] = false;
+                $marker['infowindow_content'] = 'Posicion anterior';
+                $marker['icon'] = 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=A|9999FF|000000';
+                $this->googlemaps->add_marker($marker);
+
                 $local['map'] = $this->googlemaps->create_map();
 
                 //cargar vistas
