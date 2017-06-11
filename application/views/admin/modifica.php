@@ -146,7 +146,8 @@ $detalle = $det[0];
             </form>
         </div>
             <div class="col s12 l12 m12">
-                <a class="waves-effect waves-light btn" id="mod_local"><i class="material-icons right">send</i>Mod Local</a>
+                <a class="waves-effect waves-light btn" id="mod_local"><i class="material-icons right">send</i>Modidicar</a>
+                <a class="waves-effect waves-light btn" id="volver"><i class="material-icons right">replay</i>Volver</a>
                 <br><br>
             </div>
 
@@ -163,6 +164,12 @@ $(document).ready(function(valor){
             $( location ).attr("href", url);
         });
 });
+
+$("#volver").on("click", function(){
+    url = "<?php echo base_url('local/index/'.$local_dat->ml_id);?>";
+    $( location ).attr("href", url);
+});
+
 
 $("#mod_local").on("click", function(){
 
