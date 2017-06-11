@@ -148,6 +148,8 @@ class Modifica extends CI_Controller{
             $ciudad = $this->input->post("ciudad");
             $comuna = $this->input->post("comuna");
             $region = $this->input->post("region");
+            $lat = $this->input->post("lat");
+            $lng = $this->input->post("lng");
             $descripcion = $this->input->post("descripcion");
             $tipo_local = $this->input->post("tipo_local");
             $tipo_comida = $this->input->post("tipo_comida");
@@ -155,6 +157,7 @@ class Modifica extends CI_Controller{
 
             $this->dir_locales_model->modifica_locales($id,$nombre,$calle,$numero,$direccion,$detalle,$ciudad,$comuna,$region);
             $post = $this->dir_locales_model->modifica_detalles($id,$descripcion,$tipo_local,$tipo_comida,$telefono);
+            $this->dir_locales_model->ingresa_marcadores($id,$direccion,$lat,$lng);
             echo json_encode($descripcion);
         }
 

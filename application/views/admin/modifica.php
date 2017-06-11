@@ -175,6 +175,8 @@ $("#mod_local").on("click", function(){
     var ciudad = $('#ciudad').val();
     var comuna = $('#comuna').val();
     var region = $('#region').val();
+    var lat = $('#lat').val();
+    var lng = $('#lng').val();
     var descripcion = $('#descripcion').val();
     var t_local = $('#t_local').val();
     var t_comida = $('#t_comida').val();
@@ -192,6 +194,8 @@ $("#mod_local").on("click", function(){
                   ciudad:ciudad,
                   comuna:comuna,
                   region:region,
+                  lat:lat,
+                  lng:lng,
                   descripcion:descripcion,
                   tipo_local:t_local,
                   tipo_comida:t_comida,

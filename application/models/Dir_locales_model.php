@@ -247,7 +247,15 @@ class Dir_locales_model extends CI_Model {
             $this->db->where('ml_id',$id);
             $query = $this->db->get('marcadores');
             if($query->num_rows() > 0 ){
-                return false;
+                $data = array(
+                    'ml_id' => $id,
+                    'direccion'=> $direccion,
+                    'lat' => $lat,
+                    'lng' => $lng
+                );
+                $this->db->where('ml_id', $id);
+                $this->db->update('marcadores', $data);
+                return true;
             }
             else{
                 $data = array(
