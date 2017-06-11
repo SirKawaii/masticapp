@@ -49,6 +49,10 @@ class Dir_locales_model extends CI_Model {
 
         }
 
+        public function obtener_local2($valor){
+            return $this->db->get_where("m_dir_locales",array('ml_id' => $valor))->row();
+        }
+
         public function verificar_puntaje($id_local){
             //verificar puntaje calidad
             $query_calidad = $this->db->get_where('puntaje_calidad', array('ml_id' => $id_local));

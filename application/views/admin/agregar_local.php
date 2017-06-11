@@ -1,10 +1,10 @@
 <html>
    <head>
-    <script type="text/javascript">
-		var centreGot = false;
-	</script>
-    <?php echo $map['js']; ?>
-</head>
+        <script type="text/javascript">
+            var centreGot = false;
+        </script>
+        <?php echo $map['js']; ?>
+    </head>
 <body>
    <div class="container">
     <div class="row" id="actualizador">
@@ -77,7 +77,6 @@
                         <div class="input-field col s12">
                             <i class="material-icons prefix">location_on</i>
                             <input value="" id="lng" type="text" class="validate" disabled>
-
                         </div>
                     </div>
                     </div>

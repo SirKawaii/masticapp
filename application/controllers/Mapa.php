@@ -44,7 +44,6 @@ class Mapa extends CI_Controller{
         $config['center'] = 'auto';
         //importante
         $config['apiKey'] = 'AIzaSyBmBDBqhuIcPwFmj6pWDCO4ylTCmWQab-M';
-        $this->googlemaps->initialize($config);
         $config['onboundschanged'] = 'if (!centreGot) {
                 var mapCentre = map.getCenter();
                 marker_0.setOptions({
@@ -52,7 +51,6 @@ class Mapa extends CI_Controller{
                 });
                 }
                 centreGot = true;';
-        $this->input->set_cookie('cookie_ubicacion',$config['onboundschanged']);
 
         $config['geocodeCaching'] = FALSE;
         $this->googlemaps->initialize($config);

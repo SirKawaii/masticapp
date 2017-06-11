@@ -6,6 +6,12 @@ $det = json_decode($detalles);
 $detalle = $det[0];
 
 ?>
+<head>
+    <script type="text/javascript">
+            var centreGot = false;
+    </script>
+    <?php echo $map['js']; ?>
+</head>
 <div class="container">
     <div class="row" id="actualizador">
 
@@ -68,6 +74,24 @@ $detalle = $det[0];
                                 <option value="13">13</option>
                             </select>
                             <label>Region</label>
+                        </div>
+
+                        <div>
+                            <?php echo $map['html']; ?>
+                        </div>
+
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">location_on</i>
+                            <input value="<?= $direcciongeo ?>" id="direccionesgeo" type="text" class="validate" disabled>
+                        </div>
+
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">location_on</i>
+                            <input value="" id="lat" type="text" class="validate" disabled>
+                        </div>
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">location_on</i>
+                            <input value="" id="lng" type="text" class="validate" disabled>
                         </div>
                     </div>
                     </div>

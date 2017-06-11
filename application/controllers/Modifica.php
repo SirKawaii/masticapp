@@ -47,6 +47,38 @@ class Modifica extends CI_Controller{
                 //obtener detalles del local
                 $local['detalles'] = json_encode($this->dir_locales_model->obtener_detalles($id_local));
 
+                //obtener direccion para buscarla con geocidificacion.
+                $row = $this->dir_locales_model->obtener_local2($id_local);
+                if (isset($row))
+                    {
+                    $direccionlocal = $row->ml_calle ." ". $row->ml_numero ." ". $row->ml_direccion ." ". $row->ml_ciudad;
+                    }
+                else{
+                    $direccionlocal = auto;
+                }
+
+                $local['direcciongeo'] = $direccionlocal;
+
+                //cargando geolocalizacion.
+                $this->load->library('googlemaps');
+                $config['apiKey'] = 'AIzaSyBmBDBqhuIcPwFmj6pWDCO4ylTCmWQab-M';
+                $config['center'] = $direccionlocal;
+
+                $this->googlemaps->initialize($config);
+
+                $marker = array();
+
+                $marker['position'] = $direccionlocal;
+                $marker['draggable'] = true;
+                $marker['ondragend'] = 'Materialize.toast(\'Poscion asignada\', 4000);
+                    $(\'#lat\').val(event.latLng.lat());
+                    $(\'#lng\').val(event.latLng.lng());
+                    ';
+                $marker['onclick'] = '$(\'#lat\').val(event.latLng.lat());
+                    $(\'#lng\').val(event.latLng.lng());';
+                $this->googlemaps->add_marker($marker);
+                $local['map'] = $this->googlemaps->create_map();
+
                 //cargar vistas
                 $this->load->view('tema/header',$this->variables);
                 $this->load->view('admin/modifica',$local);
