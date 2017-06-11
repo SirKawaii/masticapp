@@ -82,7 +82,7 @@ class Googlemaps {
 	var	$panoramio					= FALSE;					// If TRUE will add photos from Panoramio as a layer to your maps as a series of large and small photo icons
 	var	$panoramioTag				= '';						// Restrict the set of Panoramio photos shown to those matching a certain textual tag
 	var	$panoramioUser				= '';						// Restrict the set of Panoramio photos shown to those matching a particular user
-	var $region						= 'CL';						// Country code top-level domain (eg "uk") within which to search. Useful if supplying addresses rather than lat/longs
+	var $region						= '';						// Country code top-level domain (eg "uk") within which to search. Useful if supplying addresses rather than lat/longs
 	var $scaleControlPosition		= '';						// The position of the Scale control, eg. 'BOTTOM_RIGHT'
 	var $scrollwheel				= TRUE;						// If set to FALSE will disable zooming by scrolling of the mouse wheel
 	var $sensor						= FALSE;					// Set to TRUE if being used on a device that can detect a users location
@@ -2216,8 +2216,9 @@ class Googlemaps {
 
 		}
 
-		if ($this->https) { $data_location = 'https://'; }else{ $data_location = 'http://'; }
-		$data_location .= "maps.google.com/maps/api/geocode/json?address=".urlencode(utf8_encode($address))."&sensor=".$this->sensor;
+		if ($this->https) { $data_location = 'https://'; }else{ $data_location = 'https://'; }
+		//$data_location .= "maps.google.com/maps/api/geocode/json?address=".urlencode(utf8_encode($address))."&sensor=".$this->sensor;
+        $data_location .= "maps.googleapis.com/maps/api/geocode/json?address=".urlencode(utf8_encode($address))."&sensor=".$this->sensor."&language=es&region=CL";
 		if ($this->region!="" && strlen($this->region)==2) { $data_location .= "&region=".$this->region; }
 		$data = file_get_contents($data_location);
 
