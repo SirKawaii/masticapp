@@ -39,10 +39,10 @@
         </div></li>
         <?= $navegacion;?>
         <li>
-            <?= anchor("users","admin","class='waves-effect waves-light'"); ?>
+            <?= anchor("users","Administración","class='waves-effect hoverable'"); ?>
         </li>
       </ul>
-      <ul class="right waves-effect waves-light">
+      <ul class="right waves-effect">
         <li><a href="<?= base_url('busqueda'); ?>"><i class="material-icons">search</i></a></li>
       </ul>
       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
