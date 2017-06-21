@@ -59,7 +59,7 @@ class Local extends CI_Controller{
 
         $this->load->view('local/local',$local);
 
-        $this->load->view('local/opciones');
+        $this->load->view('local/opciones',$local);
         //opciones de administrador.
         if($this->session->userdata('isUserLoggedIn')){
             $this->load->view('local/modificarLocal',$local);

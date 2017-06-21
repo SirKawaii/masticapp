@@ -313,5 +313,16 @@ class Dir_locales_model extends CI_Model {
 
         }
 
+        public function sugiere_eliminar($id,$estado){
+
+            $datalocal = array(
+                'id_local' => $id,
+                'estado' => $estado
+            );
+
+            $query = $this->db->insert('sugerencias',$datalocal);
+            return $query;
+        }
+
 }//fin modelo.
 ?>
