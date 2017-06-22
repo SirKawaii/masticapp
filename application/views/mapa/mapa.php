@@ -1,4 +1,4 @@
-<html>
+
 <head>
     <script type="text/javascript">
 		var centreGot = false;
@@ -10,4 +10,4 @@
     <?php echo $map['html']; ?>
     </div>
 </body>
-</html>
+

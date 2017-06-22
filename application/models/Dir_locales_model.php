@@ -184,6 +184,25 @@ class Dir_locales_model extends CI_Model {
             return $resultado;
         }
 
+            public function obtener_detalles2($id_local){
+            $this->db->where('ml_id',$id_local);
+            $query = $this->db->get('m_detalles_locales');
+
+            if($query->num_rows() > 0 ){
+                $resultado = $query->row();
+            }
+            else{
+                $data = array(
+                    'ml_id' => $id_local,
+                );
+
+                $this->db->insert('m_detalles_locales', $data);
+                $this->db->where('ml_id',$id_local);
+                $resultado = $this->db->get('m_detalles_locales')->row();
+            }
+            return $resultado;
+        }
+
         public function modifica_locales($id,$nombre,$calle,$numero,$direccion,$detalle,$ciudad,$comuna,$region){
 
             //actualiza datos
@@ -323,6 +342,34 @@ class Dir_locales_model extends CI_Model {
             $query = $this->db->insert('sugerencias',$datalocal);
             return $query;
         }
+
+        public function sugiere_nuevo($estado,$id,$nombre,$calle,$numero,$direccion,$detalle,$ciudad,$comuna,$region,$imagen,$descripcion,$tipo_local,$tipo_comida,$telefono,$lat,$lng){
+
+            $datalocal = array(
+                'id_local' => $id,
+                'estado' => $estado,
+                'ml_nombre_local' => $nombre,
+                'ml_calle' => $calle,
+                'ml_numero' => $numero,
+                'ml_direccion' => $direccion,
+                'ml_detalle' => $detalle,
+                'ml_ciudad' => $ciudad,
+                'ml_comuna' => $comuna,
+                'ml_region' => $region,
+                'imagen' => $imagen,
+                'descripcion' => $descripcion,
+                'tipo_local' => $tipo_local,
+                'tipo_comida' => $tipo_comida,
+                'telefono' => $telefono,
+                'lat' => $lat,
+                'lng' => $lng
+            );
+
+            return $this->db->insert('sugerencias', $datalocal);
+            //return $this->db->insert_id();
+        }
+
+
 
 }//fin modelo.
 ?>

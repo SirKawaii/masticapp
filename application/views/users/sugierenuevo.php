@@ -1,20 +1,13 @@
-<?
-//accediendo al objeto
-$local_data = json_decode($local);
-$local_dat = $local_data[0];
-$det = json_decode($detalles);
-$detalle = $det[0];
-
-?>
-<head>
-    <script type="text/javascript">
+<html>
+   <head>
+        <script type="text/javascript">
             var centreGot = false;
-    </script>
-    <?php echo $map['js']; ?>
-</head>
-<div class="container">
+        </script>
+        <?php echo $map['js']; ?>
+    </head>
+<body>
+   <div class="container">
     <div class="row" id="actualizador">
-
         <div class="card" >
             <h5 class="col">Datos Local</h5>
                 <form>
@@ -22,43 +15,42 @@ $detalle = $det[0];
                     <div class="col s12 l12 m12">
                         <div class="input-field col s12">
                             <i class="material-icons prefix">account_circle</i>
-                            <input value="<?= $local_dat->ml_nombre_local ?>" id="nombre_local" type="text" class="validate" >
+                            <input value="" id="nombre_local" type="text" class="validate" >
                             <label for="nombre_local">Nombre local</label>
                         </div>
                         <div class="input-field col s12">
-                            <i class="material-icons prefix">account_circle</i>
-                            <input value="<?= $local_dat->ml_calle ?>" id="calle" type="text" class="validate" >
+                            <i class="material-icons prefix">store</i>
+                            <input value="" id="calle" type="text" class="validate" >
                             <label for="calle">calle</label>
                         </div>
                         <div class="input-field col s12">
-                            <i class="material-icons prefix">account_circle</i>
-                            <input value="<?= $local_dat->ml_numero ?>" id="numero" type="text" class="validate" >
+                            <i class="material-icons prefix">dialpad</i>
+                            <input value="" id="numero" type="text" class="validate" >
                             <label for="numero">numero</label>
                         </div>
                         <div class="input-field col s12">
-                            <i class="material-icons prefix">account_circle</i>
-                            <input value="<?= $local_dat->ml_direccion ?>" id="direccion" type="text" class="validate" >
+                            <i class="material-icons prefix">my_location</i>
+                            <input value="" id="direccion" type="text" class="validate" >
                             <label for="direccion">direccion</label>
                         </div>
                         <div class="input-field col s12">
-                            <i class="material-icons prefix">account_circle</i>
-                            <input value="<?= $local_dat->ml_detalle ?>" id="detalle" type="text" class="validate" >
+                            <i class="material-icons prefix">zoom_in</i>
+                            <input value="" id="detalle" type="text" class="validate" >
                             <label for="detalle">detalle</label>
                         </div>
                         <div class="input-field col s12">
-                            <i class="material-icons prefix">account_circle</i>
-                            <input value="<?= $local_dat->ml_ciudad ?>" id="ciudad" type="text" class="validate" >
+                            <i class="material-icons prefix">business</i>
+                            <input value="" id="ciudad" type="text" class="validate" >
                             <label for="ciudad">ciudad</label>
                         </div>
                         <div class="input-field col s12">
-                            <i class="material-icons prefix">account_circle</i>
-                            <input value="<?= $local_dat->ml_comuna ?>" id="comuna" type="text" class="validate" >
+                            <i class="material-icons prefix">group_work</i>
+                            <input value="" id="comuna" type="text" class="validate" >
                             <label for="nombre">comuna</label>
                         </div>
                         <div class="input-field col s12">
-                        <i class="material-icons prefix">account_circle</i>
+                        <i class="material-icons prefix">language</i>
                             <select id="region">
-                                <option value="<?= $local_dat->ml_region ?>" disabled selected>Actual:<?= $local_dat->ml_region ?></option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -75,23 +67,16 @@ $detalle = $det[0];
                             </select>
                             <label>Region</label>
                         </div>
-
                         <div>
                             <?php echo $map['html']; ?>
                         </div>
-
                         <div class="input-field col s12">
                             <i class="material-icons prefix">location_on</i>
-                            <input value="<?= $direcciongeo ?>" id="direccionesgeo" type="text" class="validate" disabled>
-                        </div>
-
-                        <div class="input-field col s12">
-                            <i class="material-icons prefix">location_on</i>
-                            <input value="<?= $latitud[0]->lat;?>" id="lat" type="text" class="validate" disabled>
+                            <input value="" id="lat" type="text" class="validate" disabled>
                         </div>
                         <div class="input-field col s12">
                             <i class="material-icons prefix">location_on</i>
-                            <input value="<?= $latitud[0]->lng;?>" id="lng" type="text" class="validate" disabled>
+                            <input value="" id="lng" type="text" class="validate" disabled>
                         </div>
                     </div>
                     </div>
@@ -100,45 +85,43 @@ $detalle = $det[0];
 
         <div class="card row">
             <h5 class="col">Detalles Local</h5>
-            <div class="col s6 l6 m6">
-                <br>
-                <p>Imagen Actual:</p>
-                <img class="responsive-img" src="<? if ($detalle->imagen != ""){echo $detalle->imagen;}else{echo base_url('assets/imagenes/404.png');} ?>">
-                <a class="boton btn-large waves-effect waves-light"><i class="material-icons">input</i> Subir Imagen</a>
+            <div class="col s12 l12 m12">
+                <form name="subir_imagen" id="subir_imagen" >
+                    <p>Imagen:</p>
+                    <input id="file_upload" name="attachment_file" class="file_upload_icon input-field col s12" type="file"/>
+                </form>
             </div>
             <form>
                 <div class="row">
                     <div class="col s12 l12 m12">
                         <div class="input-field col s12">
-                            <i class="material-icons prefix">account_circle</i>
-                            <textarea value="<?= $detalle->descripcion ?>" id="descripcion" class="materialize-textarea"><?= $detalle->descripcion ?></textarea>
+                            <i class="material-icons prefix">comment</i>
+                            <textarea value="" id="descripcion" class="materialize-textarea"></textarea>
                             <label for="descripcion">Descripcion</label>
                         </div>
                         <div class="input-field col s12">
-                        <i class="material-icons prefix">account_circle</i>
+                        <i class="material-icons prefix">toc</i>
                             <select id="t_local">
-                              <option value="<?= $detalle->tipo_local?>" disabled selected>Actual:<?= $detalle->tipo_local?></option>
-                              <option value="supermercado">Supermercado</option>
-                              <option value="casino universitario">Casino Universitario</option>
-                              <option value="restaurant">Restaurant</option>
-                              <option value="comida rapida">Comida Rapida</option>
+                              <option value="Supermercado">Supermercado</option>
+                              <option value="Casino universitario" default>Casino Universitario</option>
+                              <option value="Restaurant">Restaurant</option>
+                              <option value="Comida rapida">Comida Rapida</option>
                             </select>
                             <label>Tipo Local</label>
                         </div>
                         <div class="input-field col s12">
-                        <i class="material-icons prefix">account_circle</i>
+                        <i class="material-icons prefix">toc</i>
                             <select id="t_comida">
-                              <option value="<?= $detalle->tipo_comida?>" disabled selected>Actual:<?= $detalle->tipo_local?></option>
-                              <option value="casera">Casera</option>
-                              <option value="abarrotes">Abarrotes</option>
-                              <option value="menu">Menu</option>
-                              <option value="comida rapida">Comida Rapida</option>
+                              <option value="Casera" default>Casera</option>
+                              <option value="Abarrotes">Abarrotes</option>
+                              <option value="Menu">Menu</option>
+                              <option value="Comida rapida">Comida Rapida</option>
                             </select>
                             <label>Tipo Comida</label>
                         </div>
                         <div class="input-field col s12">
-                            <i class="material-icons prefix">account_circle</i>
-                            <input value="<?= $detalle->telefono ?>" id="telefono" type="text" class="validate" >
+                            <i class="material-icons prefix">phone</i>
+                            <input value="" id="telefono" type="text" class="validate" >
                             <label for="telefono">Teléfono</label>
                         </div>
                     </div>
@@ -146,8 +129,7 @@ $detalle = $det[0];
             </form>
         </div>
             <div class="col s12 l12 m12">
-                <a class="waves-effect waves-light btn" id="mod_local"><i class="material-icons right">send</i>Modidicar</a>
-                <a class="waves-effect waves-light btn" id="volver"><i class="material-icons right">replay</i>Volver</a>
+                <a class="waves-effect waves-light btn" id="mod_local"><i class="material-icons right">send</i>Agregar Local</a>
                 <br><br>
             </div>
 
@@ -160,20 +142,42 @@ $detalle = $det[0];
 
 $(document).ready(function(valor){
         $(".boton").on("click", function(){
-            url = "<?= base_url('modifica/view_imagen/'.$local_dat->ml_id);?>";
-            $( location ).attr("href", url);
+            //$( location ).attr("href", url);
         });
+
+        window_size = $(window).height();
+        $('#actualizador').css('min-height', window_size /2);
 });
 
-$("#volver").on("click", function(){
-    url = "<?php echo base_url('local/index/'.$local_dat->ml_id);?>";
-    $( location ).attr("href", url);
-});
+function sendData(id)
+{
+    var data = new FormData($('#subir_imagen')[0]);
+    Materialize.toast('Subiendo Imagen, no cierres la ventana.', 3000);
 
 
-$("#mod_local").on("click", function(){
+     $.ajax({
+            type:"POST",
+            url:"<?php echo base_url('sugerencia/subir/');?>",
+            data:data,
+            mimeType: "multipart/form-data",
+            contentType: false,
+            cache: false,
+            processData: false,
+            success:function(data)
+            {
+                console.log(data);
+                ruta = data;
+                Materialize.toast('Imagen Subida', 3000) // 4000 is the duration of the toast
+                Materialize.toast('Actualizando datos.', 3000)
+                nuevos_datos(data);
+            }
+       });
+}
 
-    var id = <?= $local_dat->ml_id;?>;
+function nuevos_datos(imagen){
+
+    var estado = '<?= $estado; ?>';
+    var id = ' ';
     var nombre = $('#nombre_local').val();
     var calle = $('#calle').val();
     var numero = $('#numero').val();
@@ -182,17 +186,20 @@ $("#mod_local").on("click", function(){
     var ciudad = $('#ciudad').val();
     var comuna = $('#comuna').val();
     var region = $('#region').val();
-    var lat = $('#lat').val();
-    var lng = $('#lng').val();
+    var imagen = imagen;
     var descripcion = $('#descripcion').val();
     var t_local = $('#t_local').val();
     var t_comida = $('#t_comida').val();
     var telefono = $('#telefono').val();
+    var lat = $('#lat').val();
+    var lng = $('#lng').val();
+
+
 
         $.ajax({
-            url:"<?= base_url('modifica/actualiza_local/')?>",
+            url:"<?= base_url('sugerencia/sugerirNuevoLocal/');?>",
             type:"POST",
-            data:{id:id,
+            data:{estado:estado,
                   nombre:nombre,
                   calle:calle,
                   numero:numero,
@@ -201,19 +208,19 @@ $("#mod_local").on("click", function(){
                   ciudad:ciudad,
                   comuna:comuna,
                   region:region,
-                  lat:lat,
-                  lng:lng,
+                  imagen:imagen,
                   descripcion:descripcion,
                   tipo_local:t_local,
                   tipo_comida:t_comida,
-                  telefono:telefono
+                  telefono:telefono,
+                  lat:lat,
+                  lng:lng
                  },
             success:function(respuesta){
-                $("#actualizador").addClass( "hide" );
-                $("#actualizador").removeClass("hide");
-                url = "<a href='<?= base_url('local/index/'.$local_dat->ml_id) ;?>' class='col s12 waves-effect waves-light btn orange'>Volver a"+nombre+"</a>";
-                $("#actualizador").html("<center><h3>Local Actualizado</h3></center>" + url);
-                Materialize.toast('Datos Actualizados', 3000) // 4000 is the duration of the toast
+                console.log(respuesta);
+                Materialize.toast('Datos Actualizados', 4000); // 4000 is the duration of the toast
+                url = "<a href='<?= base_url('');?>' class='col s12 waves-effect waves-light btn orange'>Volver.</a>";
+                $("#actualizador").html("<p>Sugerencia Ingresada</p>" + url);
             },
             fail:function(respuesta){
                 alert("la actualizacion Falló");
@@ -222,9 +229,14 @@ $("#mod_local").on("click", function(){
 
         });
 
+};
+
+$("#mod_local").on("click", function(){
+    //enviar datos
+    sendData();
 });
 
 
-
-
 </script>
+</body>
+</html>

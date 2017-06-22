@@ -34,10 +34,14 @@ class Sugerencia extends CI_Controller{
 
     function sugerir($id){
         $this->load->library('upload');
+        $data['local'] = $this->dir_locales_model->obtener_local2($id);
+        $data['detalles'] = $this->dir_locales_model->obtener_detalles2($id);
+        $data['latitud'] = $this->dir_locales_model->obtener_marcador($id);
 
-        $data = array();
-        if($this->session->userdata('isUserLoggedIn')){
-            $data['user'] = $this->user->getRows(array('id_usuario'=>$this->session->userdata('userId')));
+        //haciendo las cosas mas facil.
+
+            if($id == "NUEVO"){
+                $estado = "Nuevo";
                 //cargando geolocalizacion.
                 $this->load->library('googlemaps');
                 $config['apiKey'] = 'AIzaSyBmBDBqhuIcPwFmj6pWDCO4ylTCmWQab-M';
@@ -60,20 +64,61 @@ class Sugerencia extends CI_Controller{
                     ';
                 $this->googlemaps->add_marker($marker);
                 $data['map'] = $this->googlemaps->create_map();
+            }else{
+                $estado = "Modificar";
+
+                    //Posicion marcador
+                    $marcador = $this->dir_locales_model->obtener_marcador($id);
+                    if($marcador == FALSE){
+                        $lat = 0;
+                        $lng = 0;
+                    }else{
+                        $lat = $marcador[0]->lat;
+                        $lng = $marcador[0]->lng;
+                    }
+                    //cargando geolocalizacion.
+                    $this->load->library('googlemaps');
+                    $config['apiKey'] = 'AIzaSyBmBDBqhuIcPwFmj6pWDCO4ylTCmWQab-M';
+                    $config['center'] = $lat.",".$lng;
+
+                    $this->googlemaps->initialize($config);
+
+                    $marker = array();
+                    $marker['position'] = $lat.",".$lng;
+                    $marker['draggable'] = true;
+                    $marker['ondragend'] = 'Materialize.toast(\'Poscion asignada\', 4000);
+                        $(\'#lat\').val(event.latLng.lat());
+                        $(\'#lng\').val(event.latLng.lng());
+                        ';
+                    $marker['onclick'] = '$(\'#lat\').val(event.latLng.lat());
+                        $(\'#lng\').val(event.latLng.lng());';
+                    $marker['infowindow_content'] = 'Posicion Actual, mueveme para sugerir otra ubicación.';
+                    $marker['icon'] = 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=A|9999FF|000000';
+                    $this->googlemaps->add_marker($marker);
+
+                    $data['map'] = $this->googlemaps->create_map();
+                }
+                $data['estado'] = $estado;
+
+
 
                 //cargar vistas
                 $this->load->view('tema/header',$this->variables);
-                $this->load->view('admin/sugerencia',$data);
+                if($id == "NUEVO"){
+                    $this->load->view('users/sugierenuevo',$data);
+                }
+                else{
+                    $this->load->view('users/sugerencia',$data);
+                }
+
                 $this->load->view('tema/footer',$this->variables);
-        }else{
-            redirect('users/login');
-        }
+
     }
 
-    public function subir($id_local){
+    public function subir(){
 
         $attachment_file=$_FILES["attachment_file"];
-              $output_dir = 'assets/imagenes/locales/';
+              $output_dir = 'assets/imagenes/sugerencias/';
               $fileName = $_FILES["attachment_file"]["name"];
 		move_uploaded_file($_FILES["attachment_file"]["tmp_name"],$output_dir.$fileName);
 
@@ -83,14 +128,13 @@ class Sugerencia extends CI_Controller{
             $ruta = base_url($output_dir.$fileName);
         }
 
-        $this->dir_locales_model->sube_imagen($id_local,$ruta);
-
-		echo "El archivo se ha subido correctamente";
+		echo $ruta;
 
     }
 
-        public function agregarlocal(){
-
+        public function sugerirNuevoLocal(){
+            $estado = $this->input->post("estado");
+            $id = $this->input->post("id");
             $nombre = $this->input->post("nombre");
             $calle = $this->input->post("calle");
             $numero = $this->input->post("numero");
@@ -99,17 +143,15 @@ class Sugerencia extends CI_Controller{
             $ciudad = $this->input->post("ciudad");
             $comuna = $this->input->post("comuna");
             $region = $this->input->post("region");
-            $lat = $this->input->post("lat");
-            $lng = $this->input->post("lng");
+            $imagen = $this->input->post("imagen");
             $descripcion = $this->input->post("descripcion");
             $tipo_local = $this->input->post("tipo_local");
             $tipo_comida = $this->input->post("tipo_comida");
             $telefono = $this->input->post("telefono");
+            $lat = $this->input->post("lat");
+            $lng = $this->input->post("lng");
 
-            $id = $this->dir_locales_model->nuevo_local($nombre,$calle,$numero,$direccion,$detalle,$ciudad,$comuna,$region);
-
-            $this->dir_locales_model->modifica_detalles($id,$descripcion,$tipo_local,$tipo_comida,$telefono);
-            $this->dir_locales_model->ingresa_marcadores($id,$direccion,$lat,$lng);
+            $id = $this->dir_locales_model->sugiere_nuevo($estado,$id,$nombre,$calle,$numero,$direccion,$detalle,$ciudad,$comuna,$region,$imagen,$descripcion,$tipo_local,$tipo_comida,$telefono,$lat,$lng);
 
             echo $id;
         }

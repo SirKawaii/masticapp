@@ -23,7 +23,7 @@
                     <br>
                 </div>
                 <div class="col s12">
-                    <?= anchor("sugerencia/sugerir/$id","Sugerir un nuevo local.","class='col s12 waves-effect waves-light btn orange hoverable'"); ?>
+                    <?= anchor("sugerencia/sugerir/NUEVO","Sugerir un nuevo local.","class='col s12 waves-effect waves-light btn orange hoverable'"); ?>
                 </div>
             </div>
         </div>

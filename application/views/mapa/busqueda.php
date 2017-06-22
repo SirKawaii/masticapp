@@ -2,7 +2,7 @@
     $(document).ready(function(valor){
 
         window_size = $(window).height();
-        $('#resultado_busqueda').css('min-height', window_size);
+        $('#resultado_busqueda').css('min-height', window_size / 2);
 
 
         $(".input_box").on("input", function(){

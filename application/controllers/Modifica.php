@@ -47,7 +47,7 @@ class Modifica extends CI_Controller{
                 //obtener detalles del local
                 $local['detalles'] = json_encode($this->dir_locales_model->obtener_detalles($id_local));
 
-                //obtener direccion para buscarla con geocidificacion.
+                //obtener direccion para buscarla con geocodificacion.
                 $row = $this->dir_locales_model->obtener_local2($id_local);
                 if (isset($row))
                     {
@@ -85,6 +85,7 @@ class Modifica extends CI_Controller{
                     $lat = $marcador[0]->lat;
                     $lng = $marcador[0]->lng;
                 }
+                $local['latitud'] = $marcador;
                 $marker['position'] = $lat.",".$lng;
                 $marker['draggable'] = false;
                 $marker['infowindow_content'] = 'Posicion anterior';
