@@ -28,9 +28,6 @@ class Mapa extends CI_Controller{
     }
 
     function index (){
-
-
-
         //Llamada a base de detos
         $data['basedatos'] = $this->dir_locales_model->obtener_locales();
 
@@ -42,6 +39,7 @@ class Mapa extends CI_Controller{
         $this->load->library('googlemaps');
         $config = array();
         $config['center'] = 'auto';
+        $config['zoom'] = '15';
         //importante
         $config['apiKey'] = 'AIzaSyBmBDBqhuIcPwFmj6pWDCO4ylTCmWQab-M';
         $config['onboundschanged'] = 'if (!centreGot) {
@@ -82,7 +80,14 @@ class Mapa extends CI_Controller{
         $this->load->view('tema/footer', $this->variables);
 
     }
-}
+
+    function mapa(){
+        $this->load->view('tema/header', $this->variables);
+        $this->load->view('mapa/mapa3');
+        $this->load->view('tema/footer', $this->variables);
+    }
+
+}//fin
 
 
 

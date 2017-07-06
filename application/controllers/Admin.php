@@ -28,6 +28,13 @@ class Admin extends CI_Controller{
 
     }
 
+    function index(){
+        $this->load->view('tema/header', $this->variables);
+
+
+        $this->load->view('tema/footer', $this->variables);
+    }
+
 }
 
 

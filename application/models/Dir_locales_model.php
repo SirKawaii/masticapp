@@ -26,6 +26,20 @@ class Dir_locales_model extends CI_Model {
                 else{return false;}
         }
 
+        public function obtener_locales_cercanos($lat,$lng){
+            $query = $this->db->query("SELECT ml_id, ( 6371 * acos( cos( radians($lat) ) * cos( radians( lat ) )
+                                        * cos( radians( lng ) - radians($lng) ) + sin( radians($lat) ) * sin(radians(lat)) ) ) AS distance
+                                        FROM marcadores
+                                        HAVING distance < 25
+                                        ORDER BY distance
+                                        ");
+
+            if ($query->num_rows()>0){
+                return $query->result_array();
+            }
+            else{return false;}
+        }
+
         public function total_locales(){
             $query = $this->db->get('m_dir_locales');
             $total = $query->num_rows();
@@ -297,6 +311,8 @@ class Dir_locales_model extends CI_Model {
             }
             else{return false;}
         }
+
+
 
         public function ultimo_marcador(){
             $query = $last_row=$this->db->select('ml_id')->order_by('ml_id',"desc")->limit(1)->get('marcadores');

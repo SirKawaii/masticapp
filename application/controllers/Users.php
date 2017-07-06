@@ -114,6 +114,19 @@ class Users extends CI_Controller {
     }
 
     /*
+    *Users Administration
+    */
+
+    function manageUsers(){
+        $data = array();
+        if($this->session->userdata('isUserLoggedIn')){
+            $this->load->view('admin/usuarios');
+        }else{
+            redirect('users/login');
+        }
+    }
+
+    /*
      * User logout
      */
     public function logout(){
