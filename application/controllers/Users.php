@@ -66,7 +66,13 @@ class Users extends CI_Controller {
                 );
                 $checkLogin = $this->user->getRows($con);
                 if($checkLogin){
-                    $this->session->set_userdata('isUserLoggedIn',TRUE);
+                    if($checkLogin['tipo_usuario'] >= 3){
+                        $this->session->set_userdata('isUserLoggedIn',TRUE);
+                    }
+                    else{
+                        $this->session->set_userdata('isUserLoggedIn',FALSE);
+                    }
+                    //$this->session->set_userdata('isUserLoggedIn',TRUE);
                     $this->session->set_userdata('userId',$checkLogin['id_usuario']);
                     redirect('users/account/');
                 }else{
@@ -95,7 +101,9 @@ class Users extends CI_Controller {
             $userData = array(
                 'nombre' => strip_tags($this->input->post('name')),
                 'email' => strip_tags($this->input->post('email')),
-                'password' => md5($this->input->post('password'))
+                'password' => md5($this->input->post('password')),
+                'tipo_usuario' => '0',
+                'status' => '1'
             );
 
             if($this->form_validation->run() == true){

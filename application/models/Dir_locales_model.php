@@ -385,6 +385,37 @@ class Dir_locales_model extends CI_Model {
             //return $this->db->insert_id();
         }
 
+    public function obtiene_usuarios(){
+                $this->db->where('status',"1");
+                $query = $this->db->get('usuarios');
+                if ($query->num_rows()>0){
+                        return $query->result_array();
+                }
+                else{return false;}
+    }
+
+    public function modificar_usuario($id,$nuevoNombre,$nuevoTipo){
+        $data = array(
+                'nombre' => $nuevoNombre,
+                'tipo_usuario' => $nuevoTipo
+            );
+
+        $this->db->where('id_usuario', $id);
+        $query = $this->db->update('usuarios', $data);
+        return $query;
+
+    }
+    public function eliminarUsuario($id){
+               $data = array(
+                'status' => "0"
+            );
+
+        $this->db->where('id_usuario', $id);
+        $this->db->where('tipo_usuario <',7);
+        $query = $this->db->update('usuarios', $data);
+        return $query;
+    }
+
 
 
 }//fin modelo.

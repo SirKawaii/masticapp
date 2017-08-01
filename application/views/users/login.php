@@ -26,6 +26,7 @@
             <input type="submit" name="loginSubmit" class="btn-primary" value="Submit"/>
         </div>
     </form>
+    <?= anchor("users/registration","Crear Nuevo Usuario");?>
 </div>
 </body>
 </html>
