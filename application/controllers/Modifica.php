@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+error_reporting( E_ERROR | E_PARSE | E_CORE_ERROR | E_CORE_WARNING | E_COMPILE_ERROR | E_COMPILE_WARNING );
 
 class Modifica extends CI_Controller{
 
@@ -78,9 +79,11 @@ class Modifica extends CI_Controller{
                 $this->googlemaps->add_marker($marker);
                 //anterior marcador
                 $marcador = $this->dir_locales_model->obtener_marcador($id_local);
-                if($marcador == FALSE){
+                if($marcador == false){
                     $lat = 0;
                     $lng = 0;
+                    $marcador[0]->lat = '0';
+                    $marcador[0]->lng = '0';
                 }else{
                     $lat = $marcador[0]->lat;
                     $lng = $marcador[0]->lng;

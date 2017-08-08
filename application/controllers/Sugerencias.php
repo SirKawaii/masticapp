@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+error_reporting( E_ERROR | E_PARSE | E_CORE_ERROR | E_CORE_WARNING | E_COMPILE_ERROR | E_COMPILE_WARNING );
 
 class Sugerencias extends CI_Controller{
 
@@ -50,7 +51,16 @@ class Sugerencias extends CI_Controller{
         $this->load->library('upload');
         $data['local'] = $this->dir_locales_model->obtener_local_sugerido($id);
         $data['detalles'] = $this->dir_locales_model->obtener_local_sugerido($id);
-        $data['latitud'] = $this->dir_locales_model->obtener_local_sugerido($id);
+        //$data['latitud'] = $this->dir_locales_model->obtener_local_sugerido($id);
+        $marcador = $this->dir_locales_model->obtener_marcador($id);
+        if($marcador == false){
+            $marcador[0]->lat = '0';
+            $marcador[0]->lng = '0';
+
+            $data['latitud'] = $marcador;
+        }else{
+            $data['latitud'] = $marcador;
+        }
 
         //haciendo las cosas mas facil.
 

@@ -341,10 +341,19 @@ class Dir_locales_model extends CI_Model {
         public function obtener_marcador($id){
             $this->db->where('ml_id',$id);
             $query = $this->db->get('marcadores');
-            if ($query->num_rows()>0){
+            if ($query->num_rows() > 0){
                 return $query->result();
             }
             else{return false;}
+        }
+
+        public function obtener_marcador2($id){
+            $this->db->where('ml_id',$id);
+            $query = $this->db->get('marcadores');
+            if ($query->num_rows() > 0){
+                return $query->result();
+            }
+            else{return -1;}
         }
 
         public function obtener_marcador_sugerido($id){
