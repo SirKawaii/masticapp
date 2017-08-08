@@ -55,7 +55,7 @@
 <body>
 <div class="container">
     <div class="row">
-        <div class="col s8 m8 l10 hoverable ">
+        <div class="col s12 m12 l10 hoverable ">
             <?
             echo form_open();
             // Parametros
@@ -70,7 +70,7 @@
             echo form_close();
             ?>
         </div>
-        <div class="col s4 m4 l2">
+        <div  class="fixed-action-btn" style="bottom: 45px; right: 24px;">
             <a class="right boton btn-floating btn-large waves-effect waves-light red hoverable"><i class="material-icons">search</i></a>
         </div>
     </div>
