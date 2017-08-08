@@ -10,7 +10,7 @@ class Agregar extends CI_Controller{
         //helpers
         $this->load->helper('url','form');
         //bibliotecas
-        $this->load->library('navegacion', array('mapa','busqueda'));
+        $this->load->library('navegacion', array('Mapa','Busqueda'));
         //modelos
         $this->load->model('dir_locales_model');
         $this->load->model('user');

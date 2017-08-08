@@ -5,7 +5,7 @@
 </head>
 <body>
 <div class="container">
-    <h2>User Registration</h2>
+    <h3>Registro de Usuario</h3>
     <form action="" method="post">
         <div class="form-group">
             <input type="text" class="form-control" name="name" placeholder="Name" required="" value="<?php echo !empty($user['name'])?$user['name']:''; ?>">
@@ -27,7 +27,7 @@
             <input type="submit" name="regisSubmit" class="btn-primary" value="Submit"/>
         </div>
     </form>
-    <p class="footInfo">Already have an account? <a href="<?php echo base_url(); ?>users/login">Login here</a></p>
+    <p class="footInfo">¿Ya tienes una cuenta? <a href="<?php echo base_url(); ?>users/login">Ingresa acá</a></p>
 </div>
 </body>
 </html>

@@ -13,6 +13,7 @@
             <li><a class="white-text" href="https://www.junaeb.cl/beca-de-alimentacion-para-la-educacion-superior">Junaeb</a></li>
             <li><a class="white-text" href="http://www.becajunaebsodexo.cl/">Junaeb Sodexo</a></li>
             <li><a class="white-text" href="http://www.ticketjunaeb.cl/">Edenred Sodexo</a></li>
+            <li><a class="white-text" href="http://www.upla.cl/">Universidad de Playa Ancha</a></li>
           </ul>
         </div>
       </div>

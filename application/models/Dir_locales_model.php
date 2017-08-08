@@ -67,6 +67,10 @@ class Dir_locales_model extends CI_Model {
             return $this->db->get_where("m_dir_locales",array('ml_id' => $valor))->row();
         }
 
+        public function obtener_local_sugerido($id){
+             return $this->db->get_where("sugerencias",array('id_sugerencias' => $id))->row();
+        }
+
         public function verificar_puntaje($id_local){
             //verificar puntaje calidad
             $query_calidad = $this->db->get_where('puntaje_calidad', array('ml_id' => $id_local));
@@ -265,6 +269,37 @@ class Dir_locales_model extends CI_Model {
 
         }
 
+            public function modifica_detalles2($id,$descripcion,$tipo_local,$tipo_comida,$telefono,$imagen){
+            //actualiza detalles aqui
+            $this->db->where('ml_id',$id);
+            $query = $this->db->get('m_detalles_locales');
+            if($query->num_rows() > 0 ){
+                $data = array(
+                    'descripcion' => $descripcion,
+                    'imagen'=> $imagen,
+                    'tipo_local' => $tipo_local,
+                    'tipo_comida' => $tipo_comida,
+                    'telefono' => $telefono
+                );
+                $this->db->where('ml_id', $id);
+                $query = $this->db->update('m_detalles_locales', $data);
+            return $query;
+            }
+            else{
+                $data = array(
+                    'ml_id' => $id,
+                    'descripcion' => $descripcion,
+                    'imagen'=> $imagen,
+                    'tipo_local' => $tipo_local,
+                    'tipo_comida' => $tipo_comida,
+                    'telefono' => $telefono
+                );
+                $query = $this->db->insert('m_detalles_locales', $data);
+                return $query;
+            }
+
+        }
+
         public function sube_imagen($id,$ruta){
             $data = array(
                 'imagen' => $ruta
@@ -312,6 +347,15 @@ class Dir_locales_model extends CI_Model {
             else{return false;}
         }
 
+        public function obtener_marcador_sugerido($id){
+            $this->db->where('id_sugerencias',$id);
+            $query = $this->db->get('sugerencias');
+            if ($query->num_rows()>0){
+                return $query->result();
+            }
+            else{return false;}
+        }
+
 
 
         public function ultimo_marcador(){
@@ -348,10 +392,11 @@ class Dir_locales_model extends CI_Model {
 
         }
 
-        public function sugiere_eliminar($id,$estado){
+        public function sugiere_eliminar($id,$estado,$nombre){
 
             $datalocal = array(
                 'id_local' => $id,
+                'ml_nombre_local' => $nombre,
                 'estado' => $estado
             );
 
@@ -414,6 +459,19 @@ class Dir_locales_model extends CI_Model {
         $this->db->where('tipo_usuario <',7);
         $query = $this->db->update('usuarios', $data);
         return $query;
+    }
+
+    public function retornar_sugerencias(){
+            $query = $this->db->get('sugerencias');
+            if ($query->num_rows()>0){
+                return $query->result_array();
+            }
+                else{return false;}
+    }
+
+    public function eliminar_sugerencia($id){
+            $query = $this->db->where('id_sugerencias', $id);
+            $query = $this->db->delete('sugerencias');
     }
 
 

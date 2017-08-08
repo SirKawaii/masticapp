@@ -10,7 +10,7 @@ class Modifica extends CI_Controller{
         //helpers
         $this->load->helper('url','form');
         //bibliotecas
-        $this->load->library('navegacion', array('mapa','busqueda'));
+        $this->load->library('navegacion', array('Mapa','Busqueda'));
         //modelos
         $this->load->model('dir_locales_model');
         $this->load->model('user');
@@ -160,6 +160,32 @@ class Modifica extends CI_Controller{
             $post = $this->dir_locales_model->modifica_detalles($id,$descripcion,$tipo_local,$tipo_comida,$telefono);
             $this->dir_locales_model->ingresa_marcadores($id,$direccion,$lat,$lng);
             echo json_encode($descripcion);
+        }
+
+        public function actualiza_local2(){
+            $estado = $this->input->post("estado");
+            $id = $this->input->post("id");
+            $nombre = $this->input->post("nombre");
+            $calle = $this->input->post("calle");
+            $numero = $this->input->post("numero");
+            $direccion = $this->input->post("direccion");
+            $detalle = $this->input->post("detalle");
+            $ciudad = $this->input->post("ciudad");
+            $comuna = $this->input->post("comuna");
+            $region = $this->input->post("region");
+            $imagen = $this->input->post("imagen");
+            $descripcion = $this->input->post("descripcion");
+            $tipo_local = $this->input->post("tipo_local");
+            $tipo_comida = $this->input->post("tipo_comida");
+            $telefono = $this->input->post("telefono");
+            $lat = $this->input->post("lat");
+            $lng = $this->input->post("lng");
+
+            $this->dir_locales_model->modifica_locales($id,$nombre,$calle,$numero,$direccion,$detalle,$ciudad,$comuna,$region);
+            $post = $this->dir_locales_model->modifica_detalles($id,$imagen,$descripcion,$tipo_local,$tipo_comida,$telefono);
+            $this->dir_locales_model->ingresa_marcadores($id,$direccion,$lat,$lng);
+
+            echo "1";
         }
 
         function elimina($id){

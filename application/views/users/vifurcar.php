@@ -54,6 +54,7 @@
                 url:"<?= base_url('sugerencia/eliminarPost/');?>",
                 type:"POST",
                 data:{id:'<?= $id;?>',
+                      nombre:'<? $nombre_local;?>',
                       estado:'Eliminar'
                      },
                 success:function(respuesta){

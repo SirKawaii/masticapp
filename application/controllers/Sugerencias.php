@@ -1,42 +1,56 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Sugerencia extends CI_Controller{
+class Sugerencias extends CI_Controller{
 
     public $pagina, $nombreSitio, $variables;
 
     function __construct(){
         parent::__construct();
         //helpers
-        $this->load->helper('url','form');
+        $this->load->helper('url');
         //bibliotecas
         $this->load->library('navegacion', array('Mapa','Busqueda'));
+
         //modelos
         $this->load->model('dir_locales_model');
-        $this->load->model('user');
 
         //inicializacion de Atributos Globales
         $this->nombreSitio = 'Masticapp';
-        $this->pagina = 'Sugerir';
+        $this->pagina = 'Sugerencias';
         $this->variables['navegacion'] = $this->navegacion->construir_Navegacion();
+
         $this->variables['nombreSitio'] = $this->nombreSitio;
         $this->variables['titulo'] = ucfirst($this->pagina); // Capitalize the first letter
+
         //FinAtributos
+
+
     }
 
-    function index($id){
-        $data['id'] = $id;
-        $this->load->view('tema/header',$this->variables);
-        $this->load->view('users/vifurcar',$data);
-        $this->load->view('tema/footer',$this->variables);
+    function index(){
+        $this->load->library('users');
+        //$users = $this->dir_locales_model->obtiene_usuarios();
+        $sugerencias = $this->dir_locales_model->retornar_sugerencias();
+        $this->variables['sugerencias'] = $sugerencias;
+        $data = array();
+
+        if($this->session->userdata('isUserLoggedIn')){
+            $this->load->view('tema/header', $this->variables);
+            $this->load->view('admin/sugerencias',$this->variables);
+            $this->load->view('tema/footer', $this->variables);
+        }else{
+            redirect('users/login');
+        }
+        //Views
+
     }
 
-
-    function sugerir($id){
+    function localSugerido($id){
         $this->load->library('upload');
-        $data['local'] = $this->dir_locales_model->obtener_local2($id);
-        $data['detalles'] = $this->dir_locales_model->obtener_detalles2($id);
-        $data['latitud'] = $this->dir_locales_model->obtener_marcador($id);
+        $data['local'] = $this->dir_locales_model->obtener_local_sugerido($id);
+        $data['detalles'] = $this->dir_locales_model->obtener_local_sugerido($id);
+        $data['latitud'] = $this->dir_locales_model->obtener_local_sugerido($id);
 
         //haciendo las cosas mas facil.
 
@@ -68,7 +82,7 @@ class Sugerencia extends CI_Controller{
                 $estado = "Modificar";
 
                     //Posicion marcador
-                    $marcador = $this->dir_locales_model->obtener_marcador($id);
+                    $marcador = $this->dir_locales_model->obtener_marcador_sugerido($id);
                     if($marcador == FALSE){
                         $lat = 0;
                         $lng = 0;
@@ -104,13 +118,7 @@ class Sugerencia extends CI_Controller{
 
                 //cargar vistas
                 $this->load->view('tema/header',$this->variables);
-                if($id == "NUEVO"){
-                    $this->load->view('users/sugierenuevo',$data);
-                }
-                else{
-                    $this->load->view('users/sugerencia',$data);
-                }
-
+                $this->load->view('admin/localsugerido',$data);
                 $this->load->view('tema/footer',$this->variables);
 
     }
@@ -118,7 +126,7 @@ class Sugerencia extends CI_Controller{
     public function subir(){
 
         $attachment_file=$_FILES["attachment_file"];
-              $output_dir = 'assets/imagenes/sugerencias/';
+              $output_dir = 'assets/imagenes/locales/';
               $fileName = $_FILES["attachment_file"]["name"];
 		move_uploaded_file($_FILES["attachment_file"]["tmp_name"],$output_dir.$fileName);
 
@@ -156,18 +164,36 @@ class Sugerencia extends CI_Controller{
             echo $id;
         }
 
-        public function eliminarPost(){
-
+            public function actualiza_local(){
             $id = $this->input->post("id");
-            $estado = $this->input->post("estado");
+            $nombre = $this->input->post("nombre");
+            $calle = $this->input->post("calle");
+            $numero = $this->input->post("numero");
+            $direccion = $this->input->post("direccion");
+            $detalle = $this->input->post("detalle");
+            $ciudad = $this->input->post("ciudad");
+            $comuna = $this->input->post("comuna");
+            $region = $this->input->post("region");
+            $imagen = $this->input->post("imagen");
+            $descripcion = $this->input->post("descripcion");
+            $tipo_local = $this->input->post("tipo_local");
+            $tipo_comida = $this->input->post("tipo_comida");
+            $telefono = $this->input->post("telefono");
+            $lat = $this->input->post("lat");
+            $lng = $this->input->post("lng");
 
-            $local = $this->dir_locales_model->obtener_local2($id);
-            $nombre = $local->ml_nombre_local;
+            $this->dir_locales_model->modifica_locales($id,$nombre,$calle,$numero,$direccion,$detalle,$ciudad,$comuna,$region);
+            $post = $this->dir_locales_model->modifica_detalles2($id,$descripcion,$tipo_local,$tipo_comida,$telefono,$imagen);
+            $this->dir_locales_model->ingresa_marcadores($id,$direccion,$lat,$lng);
 
-            $status = $this->dir_locales_model->sugiere_eliminar($id,$estado,$nombre);
+            echo "1";
+        }
 
-            echo $status;
+        public function eliminar_sugerencia(){
+            $id = $this->input->post('id');
 
+            $post = $this->dir_locales_model->eliminar_sugerencia($id);
+            echo json_encode($post);
         }
 
 

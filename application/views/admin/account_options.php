@@ -12,7 +12,7 @@
             <?= anchor("usuarios","Usuarios","class='col s12 hoverable waves-effect waves-light btn orange'"); ?>
         </div>
         <div class="col s12 l3">
-            <a class="col s12 waves-effect waves-light btn orange">Sugerencias</a>
+            <?= anchor("sugerencias","Sugerencias","class='col s12 hoverable waves-effect waves-light btn orange'"); ?>
         </div>
         <div class="col s12 l3">
             <?= anchor("users/logout","Cerrar Sesión","class='col s12 hoverable waves-effect waves-light btn orange'"); ?>
