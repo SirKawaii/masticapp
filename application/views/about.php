@@ -16,7 +16,7 @@
                         <p>Muchas gracias a todos los que han apoyado este proyecto, a mi familia, amigos y todos los que en algún momento se han detenido a ofrecerme su invaluable ayuda.
                         </p>
                         <p>
-                        Madre, Padre, Marielle, Nicole ,Branco ,Caroline , Martin ,Connie, Kim, Rodrigo, Francisca, Hellen, Oscar, Nicolas, Felipe y muchos otros que he olvidado en este momento por el nerviosismo.
+                        Madre, Padre, Marielle, Nicole ,Branco ,Constanza, Caroline , Martin, Kim, Rodrigo, Francisca, Hellen, Oscar, Nicolas, Felipe y muchos otros que he olvidado en este momento por el nerviosismo.
                         Gracias!
                         </p>
                         <p style="text-align:right;">
