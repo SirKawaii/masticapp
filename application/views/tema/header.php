@@ -41,6 +41,7 @@
         <li>
             <?= anchor("users","Administración","class='waves-effect hoverable'"); ?>
         </li>
+        <li><div class='divider'></div></li>
         <li>
             <?= anchor("about","Acerca de","class='waves-effect hoverable'"); ?>
         </li>
