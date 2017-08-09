@@ -3,7 +3,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-  <title><?php echo $titulo; ?></title>
+  <title><?php echo $nombreSitio." - ".$titulo; ?></title>
   <link rel="icon" href="<?= base_url('assets/img/micon.png');?>" type="image/gif" sizes="32x32">
   <meta name="description" content="Buscador de Locales BAES - Encuentra locales asociados a la beca BAES Junaeb">
 
@@ -40,6 +40,9 @@
         <?= $navegacion;?>
         <li>
             <?= anchor("users","Administración","class='waves-effect hoverable'"); ?>
+        </li>
+        <li>
+            <?= anchor("about","Acerca de","class='waves-effect hoverable'"); ?>
         </li>
       </ul>
       <ul class="right waves-effect">
