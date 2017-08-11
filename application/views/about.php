@@ -28,7 +28,7 @@
                 <div class="card-panel hoverable">
                 <blockquote>
                 <p>Este software esta licenciado bajo MIT License.</p>
-                <a href="https://github.com/SirKawaii/masticapp/blob/master/LICENSE">https://github.com/SirKawaii/masticapp/blob/master/LICENSE</a>
+                <a href="https://github.com/SirKawaii/masticapp/blob/master/LICENSE">MIT License</a>
                 </blockquote>
                 </div>
 
