@@ -177,7 +177,7 @@ function sendData(id)
 function nuevos_datos(imagen){
 
     var estado = '<?= $estado; ?>';
-    var id = ' ';
+    var id = '<?= $estado; ?>';
     var nombre = $('#nombre_local').val();
     var calle = $('#calle').val();
     var numero = $('#numero').val();
@@ -200,6 +200,7 @@ function nuevos_datos(imagen){
             url:"<?= base_url('sugerencia/sugerirNuevoLocal/');?>",
             type:"POST",
             data:{estado:estado,
+                  id:id,
                   nombre:nombre,
                   calle:calle,
                   numero:numero,

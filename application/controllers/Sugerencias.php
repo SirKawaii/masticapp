@@ -64,7 +64,7 @@ class Sugerencias extends CI_Controller{
 
         //haciendo las cosas mas facil.
 
-            if($id == "NUEVO"){
+            if($id == "NUEVO" || $id == "Nuevo"){
                 $estado = "Nuevo";
                 //cargando geolocalizacion.
                 $this->load->library('googlemaps');
@@ -192,11 +192,15 @@ class Sugerencias extends CI_Controller{
             $lat = $this->input->post("lat");
             $lng = $this->input->post("lng");
 
-            $this->dir_locales_model->modifica_locales($id,$nombre,$calle,$numero,$direccion,$detalle,$ciudad,$comuna,$region);
+            if($id == 0){
+                $id = $this->dir_locales_model->nuevo_local($nombre,$calle,$numero,$direccion,$detalle,$ciudad,$comuna,$region);
+            }else{
+                $this->dir_locales_model->modifica_locales($id,$nombre,$calle,$numero,$direccion,$detalle,$ciudad,$comuna,$region);
+            }
             $post = $this->dir_locales_model->modifica_detalles2($id,$descripcion,$tipo_local,$tipo_comida,$telefono,$imagen);
             $this->dir_locales_model->ingresa_marcadores($id,$direccion,$lat,$lng);
 
-            echo "1";
+            echo $id;
         }
 
         public function eliminar_sugerencia(){

@@ -50,7 +50,7 @@ class Sugerencia extends CI_Controller{
 
         //haciendo las cosas mas facil.
 
-            if($id == "NUEVO"){
+            if($id == "NUEVO" || $id == "Nuevo"){
                 $estado = "Nuevo";
                 //cargando geolocalizacion.
                 $this->load->library('googlemaps');

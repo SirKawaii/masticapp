@@ -39,6 +39,10 @@
         </div></li>
         <?= $navegacion;?>
         <li>
+            <?= anchor("sugerencia/sugerir/NUEVO","Sugerir Local","class='waves-effect hoverable'"); ?>
+        </li>
+        <li><div class='divider'></div></li>
+        <li>
             <?= anchor("users","Administración","class='waves-effect hoverable'"); ?>
         </li>
         <li><div class='divider'></div></li>

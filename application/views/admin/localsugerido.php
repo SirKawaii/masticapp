@@ -226,7 +226,7 @@ $.ajax({
             success:function(respuesta){
                 console.log(respuesta);
                 Materialize.toast('Datos Actualizados', 4000); // 4000 is the duration of the toast
-                url = "<a href='<?= base_url('local/index/').$local->id_local;?>' class='col s12 waves-effect waves-light btn orange'>Volver al Local.</a>";
+                url = "<a href='<?= base_url('local/index/')?>"+respuesta+"' class='col s12 waves-effect waves-light btn orange'>Volver al Local.</a>";
                 $("#actualizador").html("<p>Sugerencia Ingresada</p>" + url);
             },
             fail:function(respuesta){

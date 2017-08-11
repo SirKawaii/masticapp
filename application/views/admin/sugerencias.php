@@ -18,12 +18,30 @@
                         else{
                             foreach ($sugerencias as $sugerencia){
                                 echo "<tr id='".$sugerencia['id_sugerencias']."'>";
-                                echo "<td>".anchor("local/index/".$sugerencia['id_local'],$sugerencia['ml_nombre_local'])."</td>";
-                                if($sugerencia['estado'] == "Eliminar"){
-                                    echo "<td>".anchor("modifica/elimina/".$sugerencia['id_local'],"<i class='material-icons'>delete</i>","class='col s12 waves-effect waves-light btn orange'")."</td>";
+
+
+                                switch ($sugerencia['estado']) {
+                                    case "Eliminar":
+                                        echo "<td>".anchor("local/index/".$sugerencia['id_local'],$sugerencia['ml_nombre_local'])."</td>";
+                                        break;
+                                    case "Modificar":
+                                        echo "<td>".anchor("local/index/".$sugerencia['id_local'],$sugerencia['ml_nombre_local'])."</td>";
+                                        break;
+                                    case "Nuevo":
+                                        echo "<td><p>".$sugerencia['ml_nombre_local']."</p></td>";
+                                        break;
                                 }
-                                else{
-                                    echo "<td>".anchor("sugerencias/localSugerido/".$sugerencia['id_sugerencias'],"<i class='material-icons'>edit</i>","class='col s12 waves-effect waves-light btn blue'")."</td>";
+
+                                switch ($sugerencia['estado']) {
+                                    case "Eliminar":
+                                    echo "<td>".anchor("modifica/elimina/".$sugerencia['id_local'],"<i class='material-icons'>delete</i>","class='col s12 waves-effect waves-light btn orange'")."</td>";
+                                        break;
+                                    case "Modificar":
+                                        echo "<td>".anchor("sugerencias/localSugerido/".$sugerencia['id_sugerencias'],"<i class='material-icons'>edit</i>","class='col s12 waves-effect waves-light btn blue'")."</td>";
+                                        break;
+                                    case "Nuevo":
+                                        echo "<td>".anchor("sugerencias/localSugerido/".$sugerencia['id_sugerencias'],"<i class='material-icons'>fiber_new</i>","class='col s12 waves-effect waves-light btn green'")."</td>";
+                                        break;
                                 }
                                 echo "<td><a onclick='eliminar(".$sugerencia['id_sugerencias'].")' class='col s12 waves-effect waves-light btn red'><i class='material-icons'>delete_forever</i></a></td>";
                                 echo "</tr>";
